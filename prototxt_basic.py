@@ -151,8 +151,9 @@ def Pooling_global(txt_file, info):
   if 'global_pool' not in info['attrs']:
     Pooling(txt_file, info)
     print('miss Pool_global_pool')
-  # if info['attrs']['global_pool'] == 'False':
-  #   Pooling(txt_file, info)
+    return
+  if info['attrs']['global_pool'] == 'False':
+     Pooling(txt_file, info)
 
   elif info['attrs']['global_pool'] == 'True':
     pool_type = 'AVE' if info['attrs']['pool_type'] == 'avg' else 'MAX'

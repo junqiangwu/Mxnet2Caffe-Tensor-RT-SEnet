@@ -14,13 +14,13 @@ parser = argparse.ArgumentParser(description='Convert MXNet model to Caffe model
 # #
 # parser.add_argument('--mx-model',    type=str, default='single_patch_mxnet/test')
 # parser.add_argument('--mx-epoch',    type=int, default=0)
-# parser.add_argument('--cf-prototxt', type=str, default='single_patch_caffe/deploy.prototxt')
-# parser.add_argument('--cf-model',    type=str, default='single_patch_caffe/arcface.caffemodel')
+# parser.add_argument('--cf-prototxt', type=str, default='single_patch_mxnet/single-test.prototxt')
+# parser.add_argument('--cf-model',    type=str, default='single_patch_mxnet/single-test.caffemodel')
 
 parser.add_argument('--mx-model',    type=str, default='to_be_converted/base')
 parser.add_argument('--mx-epoch',    type=int, default=7)
-parser.add_argument('--cf-prototxt', type=str, default='to_be_converted/deploy.prototxt')
-parser.add_argument('--cf-model',    type=str, default='to_be_converted/convert.caffemodel')
+parser.add_argument('--cf-prototxt', type=str, default='to_be_converted/be-converted.prototxt')
+parser.add_argument('--cf-model',    type=str, default='to_be_converted/be-converted.caffemodel')
 args = parser.parse_args()
 
 # ------------------------------------------

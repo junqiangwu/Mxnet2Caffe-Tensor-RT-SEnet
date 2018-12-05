@@ -1,1023 +1,191 @@
-0, 	op:null                , name:data                           -> data
-1, 	op:SliceChannel        , name:data_slice                     -> data_slice
-           use shared weight -> data
-{u'inputs': [[0, 0, 0]], u'name': u'data_slice', 'bottom': ['data'], 'top': u'data_slice', 'share': True, u'param': {u'squeeze_axis': u'False', u'num_outputs': u'6', u'axis': u'1'}, 'params': ['data'], u'op': u'SliceChannel'}
-3, 	op:Convolution         , name:part_0_conv0                   -> part_0_conv0
-{u'inputs': [[1, 0, 0], [2, 0, 0]], u'name': u'part_0_conv0', 'bottom': ['data_slice'], 'top': u'part_0_conv0', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_conv0_weight'], u'op': u'Convolution'}
-8, 	op:BatchNorm           , name:part_0_bn0                     -> part_0_bn0
-9, 	op:Activation          , name:part_0_relu0                   -> part_0_relu0
-10, 	op:Pooling             , name:pooling0                       -> pooling0
-12, 	op:Convolution         , name:part_0_stage1_unit1_conv1      -> part_0_stage1_unit1_conv1
-{u'inputs': [[10, 0, 0], [11, 0, 0]], u'name': u'part_0_stage1_unit1_conv1', 'bottom': ['pooling0'], 'top': u'part_0_stage1_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage1_unit1_conv1_weight'], u'op': u'Convolution'}
-17, 	op:BatchNorm           , name:part_0_stage1_unit1_bn1        -> part_0_stage1_unit1_bn1
-18, 	op:Activation          , name:part_0_stage1_unit1_relu1      -> part_0_stage1_unit1_relu1
-20, 	op:Convolution         , name:part_0_stage1_unit1_conv2      -> part_0_stage1_unit1_conv2
-{u'inputs': [[18, 0, 0], [19, 0, 0]], u'name': u'part_0_stage1_unit1_conv2', 'bottom': ['part_0_stage1_unit1_relu1'], 'top': u'part_0_stage1_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage1_unit1_conv2_weight'], u'op': u'Convolution'}
-25, 	op:BatchNorm           , name:part_0_stage1_unit1_bn2        -> part_0_stage1_unit1_bn2
-26, 	op:Activation          , name:part_0_stage1_unit1_relu2      -> part_0_stage1_unit1_relu2
-28, 	op:Convolution         , name:part_0_stage1_unit1_conv_proj  -> part_0_stage1_unit1_conv_proj
-{u'inputs': [[10, 0, 0], [27, 0, 0]], u'name': u'part_0_stage1_unit1_conv_proj', 'bottom': ['pooling0'], 'top': u'part_0_stage1_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage1_unit1_conv_proj_weight'], u'op': u'Convolution'}
-33, 	op:BatchNorm           , name:part_0_stage1_unit1_bn_proj    -> part_0_stage1_unit1_bn_proj
-34, 	op:Activation          , name:part_0_stage1_unit1_relu_proj  -> part_0_stage1_unit1_relu_proj
-35, 	op:elemwise_add        , name:_plus0                         -> _plus0
-37, 	op:Convolution         , name:part_0_stage1_unit2_conv1      -> part_0_stage1_unit2_conv1
-{u'inputs': [[35, 0, 0], [36, 0, 0]], u'name': u'part_0_stage1_unit2_conv1', 'bottom': ['_plus0'], 'top': u'part_0_stage1_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage1_unit2_conv1_weight'], u'op': u'Convolution'}
-42, 	op:BatchNorm           , name:part_0_stage1_unit2_bn1        -> part_0_stage1_unit2_bn1
-43, 	op:Activation          , name:part_0_stage1_unit2_relu1      -> part_0_stage1_unit2_relu1
-45, 	op:Convolution         , name:part_0_stage1_unit2_conv2      -> part_0_stage1_unit2_conv2
-{u'inputs': [[43, 0, 0], [44, 0, 0]], u'name': u'part_0_stage1_unit2_conv2', 'bottom': ['part_0_stage1_unit2_relu1'], 'top': u'part_0_stage1_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage1_unit2_conv2_weight'], u'op': u'Convolution'}
-50, 	op:BatchNorm           , name:part_0_stage1_unit2_bn2        -> part_0_stage1_unit2_bn2
-51, 	op:Activation          , name:part_0_stage1_unit2_relu2      -> part_0_stage1_unit2_relu2
-52, 	op:elemwise_add        , name:_plus1                         -> _plus1
-54, 	op:Convolution         , name:part_0_stage1_unit3_conv1      -> part_0_stage1_unit3_conv1
-{u'inputs': [[52, 0, 0], [53, 0, 0]], u'name': u'part_0_stage1_unit3_conv1', 'bottom': ['_plus1'], 'top': u'part_0_stage1_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage1_unit3_conv1_weight'], u'op': u'Convolution'}
-59, 	op:BatchNorm           , name:part_0_stage1_unit3_bn1        -> part_0_stage1_unit3_bn1
-60, 	op:Activation          , name:part_0_stage1_unit3_relu1      -> part_0_stage1_unit3_relu1
-62, 	op:Convolution         , name:part_0_stage1_unit3_conv2      -> part_0_stage1_unit3_conv2
-{u'inputs': [[60, 0, 0], [61, 0, 0]], u'name': u'part_0_stage1_unit3_conv2', 'bottom': ['part_0_stage1_unit3_relu1'], 'top': u'part_0_stage1_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage1_unit3_conv2_weight'], u'op': u'Convolution'}
-67, 	op:BatchNorm           , name:part_0_stage1_unit3_bn2        -> part_0_stage1_unit3_bn2
-68, 	op:Activation          , name:part_0_stage1_unit3_relu2      -> part_0_stage1_unit3_relu2
-69, 	op:elemwise_add        , name:_plus2                         -> _plus2
-71, 	op:Convolution         , name:part_0_stage2_unit1_conv1      -> part_0_stage2_unit1_conv1
-{u'inputs': [[69, 0, 0], [70, 0, 0]], u'name': u'part_0_stage2_unit1_conv1', 'bottom': ['_plus2'], 'top': u'part_0_stage2_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage2_unit1_conv1_weight'], u'op': u'Convolution'}
-76, 	op:BatchNorm           , name:part_0_stage2_unit1_bn1        -> part_0_stage2_unit1_bn1
-77, 	op:Activation          , name:part_0_stage2_unit1_relu1      -> part_0_stage2_unit1_relu1
-79, 	op:Convolution         , name:part_0_stage2_unit1_conv2      -> part_0_stage2_unit1_conv2
-{u'inputs': [[77, 0, 0], [78, 0, 0]], u'name': u'part_0_stage2_unit1_conv2', 'bottom': ['part_0_stage2_unit1_relu1'], 'top': u'part_0_stage2_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage2_unit1_conv2_weight'], u'op': u'Convolution'}
-84, 	op:BatchNorm           , name:part_0_stage2_unit1_bn2        -> part_0_stage2_unit1_bn2
-85, 	op:Activation          , name:part_0_stage2_unit1_relu2      -> part_0_stage2_unit1_relu2
-87, 	op:Convolution         , name:part_0_stage2_unit1_conv_proj  -> part_0_stage2_unit1_conv_proj
-{u'inputs': [[69, 0, 0], [86, 0, 0]], u'name': u'part_0_stage2_unit1_conv_proj', 'bottom': ['_plus2'], 'top': u'part_0_stage2_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage2_unit1_conv_proj_weight'], u'op': u'Convolution'}
-92, 	op:BatchNorm           , name:part_0_stage2_unit1_bn_proj    -> part_0_stage2_unit1_bn_proj
-93, 	op:Activation          , name:part_0_stage2_unit1_relu_proj  -> part_0_stage2_unit1_relu_proj
-94, 	op:elemwise_add        , name:_plus3                         -> _plus3
-96, 	op:Convolution         , name:part_0_stage2_unit2_conv1      -> part_0_stage2_unit2_conv1
-{u'inputs': [[94, 0, 0], [95, 0, 0]], u'name': u'part_0_stage2_unit2_conv1', 'bottom': ['_plus3'], 'top': u'part_0_stage2_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage2_unit2_conv1_weight'], u'op': u'Convolution'}
-101, 	op:BatchNorm           , name:part_0_stage2_unit2_bn1        -> part_0_stage2_unit2_bn1
-102, 	op:Activation          , name:part_0_stage2_unit2_relu1      -> part_0_stage2_unit2_relu1
-104, 	op:Convolution         , name:part_0_stage2_unit2_conv2      -> part_0_stage2_unit2_conv2
-{u'inputs': [[102, 0, 0], [103, 0, 0]], u'name': u'part_0_stage2_unit2_conv2', 'bottom': ['part_0_stage2_unit2_relu1'], 'top': u'part_0_stage2_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage2_unit2_conv2_weight'], u'op': u'Convolution'}
-109, 	op:BatchNorm           , name:part_0_stage2_unit2_bn2        -> part_0_stage2_unit2_bn2
-110, 	op:Activation          , name:part_0_stage2_unit2_relu2      -> part_0_stage2_unit2_relu2
-111, 	op:elemwise_add        , name:_plus4                         -> _plus4
-113, 	op:Convolution         , name:part_0_stage2_unit3_conv1      -> part_0_stage2_unit3_conv1
-{u'inputs': [[111, 0, 0], [112, 0, 0]], u'name': u'part_0_stage2_unit3_conv1', 'bottom': ['_plus4'], 'top': u'part_0_stage2_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage2_unit3_conv1_weight'], u'op': u'Convolution'}
-118, 	op:BatchNorm           , name:part_0_stage2_unit3_bn1        -> part_0_stage2_unit3_bn1
-119, 	op:Activation          , name:part_0_stage2_unit3_relu1      -> part_0_stage2_unit3_relu1
-121, 	op:Convolution         , name:part_0_stage2_unit3_conv2      -> part_0_stage2_unit3_conv2
-{u'inputs': [[119, 0, 0], [120, 0, 0]], u'name': u'part_0_stage2_unit3_conv2', 'bottom': ['part_0_stage2_unit3_relu1'], 'top': u'part_0_stage2_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage2_unit3_conv2_weight'], u'op': u'Convolution'}
-126, 	op:BatchNorm           , name:part_0_stage2_unit3_bn2        -> part_0_stage2_unit3_bn2
-127, 	op:Activation          , name:part_0_stage2_unit3_relu2      -> part_0_stage2_unit3_relu2
-128, 	op:elemwise_add        , name:_plus5                         -> _plus5
-130, 	op:Convolution         , name:part_0_stage2_unit4_conv1      -> part_0_stage2_unit4_conv1
-{u'inputs': [[128, 0, 0], [129, 0, 0]], u'name': u'part_0_stage2_unit4_conv1', 'bottom': ['_plus5'], 'top': u'part_0_stage2_unit4_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage2_unit4_conv1_weight'], u'op': u'Convolution'}
-135, 	op:BatchNorm           , name:part_0_stage2_unit4_bn1        -> part_0_stage2_unit4_bn1
-136, 	op:Activation          , name:part_0_stage2_unit4_relu1      -> part_0_stage2_unit4_relu1
-138, 	op:Convolution         , name:part_0_stage2_unit4_conv2      -> part_0_stage2_unit4_conv2
-{u'inputs': [[136, 0, 0], [137, 0, 0]], u'name': u'part_0_stage2_unit4_conv2', 'bottom': ['part_0_stage2_unit4_relu1'], 'top': u'part_0_stage2_unit4_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage2_unit4_conv2_weight'], u'op': u'Convolution'}
-143, 	op:BatchNorm           , name:part_0_stage2_unit4_bn2        -> part_0_stage2_unit4_bn2
-144, 	op:Activation          , name:part_0_stage2_unit4_relu2      -> part_0_stage2_unit4_relu2
-145, 	op:elemwise_add        , name:_plus6                         -> _plus6
-147, 	op:Convolution         , name:part_0_stage3_unit1_conv1      -> part_0_stage3_unit1_conv1
-{u'inputs': [[145, 0, 0], [146, 0, 0]], u'name': u'part_0_stage3_unit1_conv1', 'bottom': ['_plus6'], 'top': u'part_0_stage3_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage3_unit1_conv1_weight'], u'op': u'Convolution'}
-152, 	op:BatchNorm           , name:part_0_stage3_unit1_bn1        -> part_0_stage3_unit1_bn1
-153, 	op:Activation          , name:part_0_stage3_unit1_relu1      -> part_0_stage3_unit1_relu1
-155, 	op:Convolution         , name:part_0_stage3_unit1_conv2      -> part_0_stage3_unit1_conv2
-{u'inputs': [[153, 0, 0], [154, 0, 0]], u'name': u'part_0_stage3_unit1_conv2', 'bottom': ['part_0_stage3_unit1_relu1'], 'top': u'part_0_stage3_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage3_unit1_conv2_weight'], u'op': u'Convolution'}
-160, 	op:BatchNorm           , name:part_0_stage3_unit1_bn2        -> part_0_stage3_unit1_bn2
-161, 	op:Activation          , name:part_0_stage3_unit1_relu2      -> part_0_stage3_unit1_relu2
-163, 	op:Convolution         , name:part_0_stage3_unit1_conv_proj  -> part_0_stage3_unit1_conv_proj
-{u'inputs': [[145, 0, 0], [162, 0, 0]], u'name': u'part_0_stage3_unit1_conv_proj', 'bottom': ['_plus6'], 'top': u'part_0_stage3_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage3_unit1_conv_proj_weight'], u'op': u'Convolution'}
-168, 	op:BatchNorm           , name:part_0_stage3_unit1_bn_proj    -> part_0_stage3_unit1_bn_proj
-169, 	op:Activation          , name:part_0_stage3_unit1_relu_proj  -> part_0_stage3_unit1_relu_proj
-170, 	op:elemwise_add        , name:_plus7                         -> _plus7
-172, 	op:Convolution         , name:part_0_stage3_unit2_conv1      -> part_0_stage3_unit2_conv1
-{u'inputs': [[170, 0, 0], [171, 0, 0]], u'name': u'part_0_stage3_unit2_conv1', 'bottom': ['_plus7'], 'top': u'part_0_stage3_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage3_unit2_conv1_weight'], u'op': u'Convolution'}
-177, 	op:BatchNorm           , name:part_0_stage3_unit2_bn1        -> part_0_stage3_unit2_bn1
-178, 	op:Activation          , name:part_0_stage3_unit2_relu1      -> part_0_stage3_unit2_relu1
-180, 	op:Convolution         , name:part_0_stage3_unit2_conv2      -> part_0_stage3_unit2_conv2
-{u'inputs': [[178, 0, 0], [179, 0, 0]], u'name': u'part_0_stage3_unit2_conv2', 'bottom': ['part_0_stage3_unit2_relu1'], 'top': u'part_0_stage3_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage3_unit2_conv2_weight'], u'op': u'Convolution'}
-185, 	op:BatchNorm           , name:part_0_stage3_unit2_bn2        -> part_0_stage3_unit2_bn2
-186, 	op:Activation          , name:part_0_stage3_unit2_relu2      -> part_0_stage3_unit2_relu2
-187, 	op:elemwise_add        , name:_plus8                         -> _plus8
-189, 	op:Convolution         , name:part_0_stage3_unit3_conv1      -> part_0_stage3_unit3_conv1
-{u'inputs': [[187, 0, 0], [188, 0, 0]], u'name': u'part_0_stage3_unit3_conv1', 'bottom': ['_plus8'], 'top': u'part_0_stage3_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage3_unit3_conv1_weight'], u'op': u'Convolution'}
-194, 	op:BatchNorm           , name:part_0_stage3_unit3_bn1        -> part_0_stage3_unit3_bn1
-195, 	op:Activation          , name:part_0_stage3_unit3_relu1      -> part_0_stage3_unit3_relu1
-197, 	op:Convolution         , name:part_0_stage3_unit3_conv2      -> part_0_stage3_unit3_conv2
-{u'inputs': [[195, 0, 0], [196, 0, 0]], u'name': u'part_0_stage3_unit3_conv2', 'bottom': ['part_0_stage3_unit3_relu1'], 'top': u'part_0_stage3_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage3_unit3_conv2_weight'], u'op': u'Convolution'}
-202, 	op:BatchNorm           , name:part_0_stage3_unit3_bn2        -> part_0_stage3_unit3_bn2
-203, 	op:Activation          , name:part_0_stage3_unit3_relu2      -> part_0_stage3_unit3_relu2
-204, 	op:elemwise_add        , name:_plus9                         -> _plus9
-206, 	op:Convolution         , name:part_0_stage3_unit4_conv1      -> part_0_stage3_unit4_conv1
-{u'inputs': [[204, 0, 0], [205, 0, 0]], u'name': u'part_0_stage3_unit4_conv1', 'bottom': ['_plus9'], 'top': u'part_0_stage3_unit4_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage3_unit4_conv1_weight'], u'op': u'Convolution'}
-211, 	op:BatchNorm           , name:part_0_stage3_unit4_bn1        -> part_0_stage3_unit4_bn1
-212, 	op:Activation          , name:part_0_stage3_unit4_relu1      -> part_0_stage3_unit4_relu1
-214, 	op:Convolution         , name:part_0_stage3_unit4_conv2      -> part_0_stage3_unit4_conv2
-{u'inputs': [[212, 0, 0], [213, 0, 0]], u'name': u'part_0_stage3_unit4_conv2', 'bottom': ['part_0_stage3_unit4_relu1'], 'top': u'part_0_stage3_unit4_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage3_unit4_conv2_weight'], u'op': u'Convolution'}
-219, 	op:BatchNorm           , name:part_0_stage3_unit4_bn2        -> part_0_stage3_unit4_bn2
-220, 	op:Activation          , name:part_0_stage3_unit4_relu2      -> part_0_stage3_unit4_relu2
-221, 	op:elemwise_add        , name:_plus10                        -> _plus10
-223, 	op:Convolution         , name:part_0_stage3_unit5_conv1      -> part_0_stage3_unit5_conv1
-{u'inputs': [[221, 0, 0], [222, 0, 0]], u'name': u'part_0_stage3_unit5_conv1', 'bottom': ['_plus10'], 'top': u'part_0_stage3_unit5_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage3_unit5_conv1_weight'], u'op': u'Convolution'}
-228, 	op:BatchNorm           , name:part_0_stage3_unit5_bn1        -> part_0_stage3_unit5_bn1
-229, 	op:Activation          , name:part_0_stage3_unit5_relu1      -> part_0_stage3_unit5_relu1
-231, 	op:Convolution         , name:part_0_stage3_unit5_conv2      -> part_0_stage3_unit5_conv2
-{u'inputs': [[229, 0, 0], [230, 0, 0]], u'name': u'part_0_stage3_unit5_conv2', 'bottom': ['part_0_stage3_unit5_relu1'], 'top': u'part_0_stage3_unit5_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage3_unit5_conv2_weight'], u'op': u'Convolution'}
-236, 	op:BatchNorm           , name:part_0_stage3_unit5_bn2        -> part_0_stage3_unit5_bn2
-237, 	op:Activation          , name:part_0_stage3_unit5_relu2      -> part_0_stage3_unit5_relu2
-238, 	op:elemwise_add        , name:_plus11                        -> _plus11
-240, 	op:Convolution         , name:part_0_stage3_unit6_conv1      -> part_0_stage3_unit6_conv1
-{u'inputs': [[238, 0, 0], [239, 0, 0]], u'name': u'part_0_stage3_unit6_conv1', 'bottom': ['_plus11'], 'top': u'part_0_stage3_unit6_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage3_unit6_conv1_weight'], u'op': u'Convolution'}
-245, 	op:BatchNorm           , name:part_0_stage3_unit6_bn1        -> part_0_stage3_unit6_bn1
-246, 	op:Activation          , name:part_0_stage3_unit6_relu1      -> part_0_stage3_unit6_relu1
-248, 	op:Convolution         , name:part_0_stage3_unit6_conv2      -> part_0_stage3_unit6_conv2
-{u'inputs': [[246, 0, 0], [247, 0, 0]], u'name': u'part_0_stage3_unit6_conv2', 'bottom': ['part_0_stage3_unit6_relu1'], 'top': u'part_0_stage3_unit6_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage3_unit6_conv2_weight'], u'op': u'Convolution'}
-253, 	op:BatchNorm           , name:part_0_stage3_unit6_bn2        -> part_0_stage3_unit6_bn2
-254, 	op:Activation          , name:part_0_stage3_unit6_relu2      -> part_0_stage3_unit6_relu2
-255, 	op:elemwise_add        , name:_plus12                        -> _plus12
-257, 	op:Convolution         , name:part_0_stage4_unit1_conv1      -> part_0_stage4_unit1_conv1
-{u'inputs': [[255, 0, 0], [256, 0, 0]], u'name': u'part_0_stage4_unit1_conv1', 'bottom': ['_plus12'], 'top': u'part_0_stage4_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage4_unit1_conv1_weight'], u'op': u'Convolution'}
-262, 	op:BatchNorm           , name:part_0_stage4_unit1_bn1        -> part_0_stage4_unit1_bn1
-263, 	op:Activation          , name:part_0_stage4_unit1_relu1      -> part_0_stage4_unit1_relu1
-265, 	op:Convolution         , name:part_0_stage4_unit1_conv2      -> part_0_stage4_unit1_conv2
-{u'inputs': [[263, 0, 0], [264, 0, 0]], u'name': u'part_0_stage4_unit1_conv2', 'bottom': ['part_0_stage4_unit1_relu1'], 'top': u'part_0_stage4_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage4_unit1_conv2_weight'], u'op': u'Convolution'}
-270, 	op:BatchNorm           , name:part_0_stage4_unit1_bn2        -> part_0_stage4_unit1_bn2
-271, 	op:Activation          , name:part_0_stage4_unit1_relu2      -> part_0_stage4_unit1_relu2
-273, 	op:Convolution         , name:part_0_stage4_unit1_conv_proj  -> part_0_stage4_unit1_conv_proj
-{u'inputs': [[255, 0, 0], [272, 0, 0]], u'name': u'part_0_stage4_unit1_conv_proj', 'bottom': ['_plus12'], 'top': u'part_0_stage4_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage4_unit1_conv_proj_weight'], u'op': u'Convolution'}
-278, 	op:BatchNorm           , name:part_0_stage4_unit1_bn_proj    -> part_0_stage4_unit1_bn_proj
-279, 	op:Activation          , name:part_0_stage4_unit1_relu_proj  -> part_0_stage4_unit1_relu_proj
-280, 	op:elemwise_add        , name:_plus13                        -> _plus13
-282, 	op:Convolution         , name:part_0_stage4_unit2_conv1      -> part_0_stage4_unit2_conv1
-{u'inputs': [[280, 0, 0], [281, 0, 0]], u'name': u'part_0_stage4_unit2_conv1', 'bottom': ['_plus13'], 'top': u'part_0_stage4_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage4_unit2_conv1_weight'], u'op': u'Convolution'}
-287, 	op:BatchNorm           , name:part_0_stage4_unit2_bn1        -> part_0_stage4_unit2_bn1
-288, 	op:Activation          , name:part_0_stage4_unit2_relu1      -> part_0_stage4_unit2_relu1
-290, 	op:Convolution         , name:part_0_stage4_unit2_conv2      -> part_0_stage4_unit2_conv2
-{u'inputs': [[288, 0, 0], [289, 0, 0]], u'name': u'part_0_stage4_unit2_conv2', 'bottom': ['part_0_stage4_unit2_relu1'], 'top': u'part_0_stage4_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage4_unit2_conv2_weight'], u'op': u'Convolution'}
-295, 	op:BatchNorm           , name:part_0_stage4_unit2_bn2        -> part_0_stage4_unit2_bn2
-296, 	op:Activation          , name:part_0_stage4_unit2_relu2      -> part_0_stage4_unit2_relu2
-297, 	op:elemwise_add        , name:_plus14                        -> _plus14
-299, 	op:Convolution         , name:part_0_stage4_unit3_conv1      -> part_0_stage4_unit3_conv1
-{u'inputs': [[297, 0, 0], [298, 0, 0]], u'name': u'part_0_stage4_unit3_conv1', 'bottom': ['_plus14'], 'top': u'part_0_stage4_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage4_unit3_conv1_weight'], u'op': u'Convolution'}
-304, 	op:BatchNorm           , name:part_0_stage4_unit3_bn1        -> part_0_stage4_unit3_bn1
-305, 	op:Activation          , name:part_0_stage4_unit3_relu1      -> part_0_stage4_unit3_relu1
-307, 	op:Convolution         , name:part_0_stage4_unit3_conv2      -> part_0_stage4_unit3_conv2
-{u'inputs': [[305, 0, 0], [306, 0, 0]], u'name': u'part_0_stage4_unit3_conv2', 'bottom': ['part_0_stage4_unit3_relu1'], 'top': u'part_0_stage4_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_0_stage4_unit3_conv2_weight'], u'op': u'Convolution'}
-312, 	op:BatchNorm           , name:part_0_stage4_unit3_bn2        -> part_0_stage4_unit3_bn2
-313, 	op:Activation          , name:part_0_stage4_unit3_relu2      -> part_0_stage4_unit3_relu2
-314, 	op:elemwise_add        , name:_plus15                        -> _plus15
-315, 	op:Pooling             , name:part_0_pool1                   -> part_0_pool1
-316, 	op:Flatten             , name:part_0_flat_pool               -> part_0_flat_pool
-321, 	op:BatchNorm           , name:part_0_bn_pool                 -> part_0_bn_pool
-324, 	op:FullyConnected      , name:part_0_flat                    -> part_0_flat
-326, 	op:Convolution         , name:part_1_conv0                   -> part_1_conv0
-{u'inputs': [[1, 1, 0], [325, 0, 0]], u'name': u'part_1_conv0', 'bottom': ['data_slice'], 'top': u'part_1_conv0', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_conv0_weight'], u'op': u'Convolution'}
-331, 	op:BatchNorm           , name:part_1_bn0                     -> part_1_bn0
-332, 	op:Activation          , name:part_1_relu0                   -> part_1_relu0
-333, 	op:Pooling             , name:pooling1                       -> pooling1
-335, 	op:Convolution         , name:part_1_stage1_unit1_conv1      -> part_1_stage1_unit1_conv1
-{u'inputs': [[333, 0, 0], [334, 0, 0]], u'name': u'part_1_stage1_unit1_conv1', 'bottom': ['pooling1'], 'top': u'part_1_stage1_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage1_unit1_conv1_weight'], u'op': u'Convolution'}
-340, 	op:BatchNorm           , name:part_1_stage1_unit1_bn1        -> part_1_stage1_unit1_bn1
-341, 	op:Activation          , name:part_1_stage1_unit1_relu1      -> part_1_stage1_unit1_relu1
-343, 	op:Convolution         , name:part_1_stage1_unit1_conv2      -> part_1_stage1_unit1_conv2
-{u'inputs': [[341, 0, 0], [342, 0, 0]], u'name': u'part_1_stage1_unit1_conv2', 'bottom': ['part_1_stage1_unit1_relu1'], 'top': u'part_1_stage1_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage1_unit1_conv2_weight'], u'op': u'Convolution'}
-348, 	op:BatchNorm           , name:part_1_stage1_unit1_bn2        -> part_1_stage1_unit1_bn2
-349, 	op:Activation          , name:part_1_stage1_unit1_relu2      -> part_1_stage1_unit1_relu2
-351, 	op:Convolution         , name:part_1_stage1_unit1_conv_proj  -> part_1_stage1_unit1_conv_proj
-{u'inputs': [[333, 0, 0], [350, 0, 0]], u'name': u'part_1_stage1_unit1_conv_proj', 'bottom': ['pooling1'], 'top': u'part_1_stage1_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage1_unit1_conv_proj_weight'], u'op': u'Convolution'}
-356, 	op:BatchNorm           , name:part_1_stage1_unit1_bn_proj    -> part_1_stage1_unit1_bn_proj
-357, 	op:Activation          , name:part_1_stage1_unit1_relu_proj  -> part_1_stage1_unit1_relu_proj
-358, 	op:elemwise_add        , name:_plus16                        -> _plus16
-360, 	op:Convolution         , name:part_1_stage1_unit2_conv1      -> part_1_stage1_unit2_conv1
-{u'inputs': [[358, 0, 0], [359, 0, 0]], u'name': u'part_1_stage1_unit2_conv1', 'bottom': ['_plus16'], 'top': u'part_1_stage1_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage1_unit2_conv1_weight'], u'op': u'Convolution'}
-365, 	op:BatchNorm           , name:part_1_stage1_unit2_bn1        -> part_1_stage1_unit2_bn1
-366, 	op:Activation          , name:part_1_stage1_unit2_relu1      -> part_1_stage1_unit2_relu1
-368, 	op:Convolution         , name:part_1_stage1_unit2_conv2      -> part_1_stage1_unit2_conv2
-{u'inputs': [[366, 0, 0], [367, 0, 0]], u'name': u'part_1_stage1_unit2_conv2', 'bottom': ['part_1_stage1_unit2_relu1'], 'top': u'part_1_stage1_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage1_unit2_conv2_weight'], u'op': u'Convolution'}
-373, 	op:BatchNorm           , name:part_1_stage1_unit2_bn2        -> part_1_stage1_unit2_bn2
-374, 	op:Activation          , name:part_1_stage1_unit2_relu2      -> part_1_stage1_unit2_relu2
-375, 	op:elemwise_add        , name:_plus17                        -> _plus17
-377, 	op:Convolution         , name:part_1_stage1_unit3_conv1      -> part_1_stage1_unit3_conv1
-{u'inputs': [[375, 0, 0], [376, 0, 0]], u'name': u'part_1_stage1_unit3_conv1', 'bottom': ['_plus17'], 'top': u'part_1_stage1_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage1_unit3_conv1_weight'], u'op': u'Convolution'}
-382, 	op:BatchNorm           , name:part_1_stage1_unit3_bn1        -> part_1_stage1_unit3_bn1
-383, 	op:Activation          , name:part_1_stage1_unit3_relu1      -> part_1_stage1_unit3_relu1
-385, 	op:Convolution         , name:part_1_stage1_unit3_conv2      -> part_1_stage1_unit3_conv2
-{u'inputs': [[383, 0, 0], [384, 0, 0]], u'name': u'part_1_stage1_unit3_conv2', 'bottom': ['part_1_stage1_unit3_relu1'], 'top': u'part_1_stage1_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage1_unit3_conv2_weight'], u'op': u'Convolution'}
-390, 	op:BatchNorm           , name:part_1_stage1_unit3_bn2        -> part_1_stage1_unit3_bn2
-391, 	op:Activation          , name:part_1_stage1_unit3_relu2      -> part_1_stage1_unit3_relu2
-392, 	op:elemwise_add        , name:_plus18                        -> _plus18
-394, 	op:Convolution         , name:part_1_stage2_unit1_conv1      -> part_1_stage2_unit1_conv1
-{u'inputs': [[392, 0, 0], [393, 0, 0]], u'name': u'part_1_stage2_unit1_conv1', 'bottom': ['_plus18'], 'top': u'part_1_stage2_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage2_unit1_conv1_weight'], u'op': u'Convolution'}
-399, 	op:BatchNorm           , name:part_1_stage2_unit1_bn1        -> part_1_stage2_unit1_bn1
-400, 	op:Activation          , name:part_1_stage2_unit1_relu1      -> part_1_stage2_unit1_relu1
-402, 	op:Convolution         , name:part_1_stage2_unit1_conv2      -> part_1_stage2_unit1_conv2
-{u'inputs': [[400, 0, 0], [401, 0, 0]], u'name': u'part_1_stage2_unit1_conv2', 'bottom': ['part_1_stage2_unit1_relu1'], 'top': u'part_1_stage2_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage2_unit1_conv2_weight'], u'op': u'Convolution'}
-407, 	op:BatchNorm           , name:part_1_stage2_unit1_bn2        -> part_1_stage2_unit1_bn2
-408, 	op:Activation          , name:part_1_stage2_unit1_relu2      -> part_1_stage2_unit1_relu2
-410, 	op:Convolution         , name:part_1_stage2_unit1_conv_proj  -> part_1_stage2_unit1_conv_proj
-{u'inputs': [[392, 0, 0], [409, 0, 0]], u'name': u'part_1_stage2_unit1_conv_proj', 'bottom': ['_plus18'], 'top': u'part_1_stage2_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage2_unit1_conv_proj_weight'], u'op': u'Convolution'}
-415, 	op:BatchNorm           , name:part_1_stage2_unit1_bn_proj    -> part_1_stage2_unit1_bn_proj
-416, 	op:Activation          , name:part_1_stage2_unit1_relu_proj  -> part_1_stage2_unit1_relu_proj
-417, 	op:elemwise_add        , name:_plus19                        -> _plus19
-419, 	op:Convolution         , name:part_1_stage2_unit2_conv1      -> part_1_stage2_unit2_conv1
-{u'inputs': [[417, 0, 0], [418, 0, 0]], u'name': u'part_1_stage2_unit2_conv1', 'bottom': ['_plus19'], 'top': u'part_1_stage2_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage2_unit2_conv1_weight'], u'op': u'Convolution'}
-424, 	op:BatchNorm           , name:part_1_stage2_unit2_bn1        -> part_1_stage2_unit2_bn1
-425, 	op:Activation          , name:part_1_stage2_unit2_relu1      -> part_1_stage2_unit2_relu1
-427, 	op:Convolution         , name:part_1_stage2_unit2_conv2      -> part_1_stage2_unit2_conv2
-{u'inputs': [[425, 0, 0], [426, 0, 0]], u'name': u'part_1_stage2_unit2_conv2', 'bottom': ['part_1_stage2_unit2_relu1'], 'top': u'part_1_stage2_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage2_unit2_conv2_weight'], u'op': u'Convolution'}
-432, 	op:BatchNorm           , name:part_1_stage2_unit2_bn2        -> part_1_stage2_unit2_bn2
-433, 	op:Activation          , name:part_1_stage2_unit2_relu2      -> part_1_stage2_unit2_relu2
-434, 	op:elemwise_add        , name:_plus20                        -> _plus20
-436, 	op:Convolution         , name:part_1_stage2_unit3_conv1      -> part_1_stage2_unit3_conv1
-{u'inputs': [[434, 0, 0], [435, 0, 0]], u'name': u'part_1_stage2_unit3_conv1', 'bottom': ['_plus20'], 'top': u'part_1_stage2_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage2_unit3_conv1_weight'], u'op': u'Convolution'}
-441, 	op:BatchNorm           , name:part_1_stage2_unit3_bn1        -> part_1_stage2_unit3_bn1
-442, 	op:Activation          , name:part_1_stage2_unit3_relu1      -> part_1_stage2_unit3_relu1
-444, 	op:Convolution         , name:part_1_stage2_unit3_conv2      -> part_1_stage2_unit3_conv2
-{u'inputs': [[442, 0, 0], [443, 0, 0]], u'name': u'part_1_stage2_unit3_conv2', 'bottom': ['part_1_stage2_unit3_relu1'], 'top': u'part_1_stage2_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage2_unit3_conv2_weight'], u'op': u'Convolution'}
-449, 	op:BatchNorm           , name:part_1_stage2_unit3_bn2        -> part_1_stage2_unit3_bn2
-450, 	op:Activation          , name:part_1_stage2_unit3_relu2      -> part_1_stage2_unit3_relu2
-451, 	op:elemwise_add        , name:_plus21                        -> _plus21
-453, 	op:Convolution         , name:part_1_stage2_unit4_conv1      -> part_1_stage2_unit4_conv1
-{u'inputs': [[451, 0, 0], [452, 0, 0]], u'name': u'part_1_stage2_unit4_conv1', 'bottom': ['_plus21'], 'top': u'part_1_stage2_unit4_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage2_unit4_conv1_weight'], u'op': u'Convolution'}
-458, 	op:BatchNorm           , name:part_1_stage2_unit4_bn1        -> part_1_stage2_unit4_bn1
-459, 	op:Activation          , name:part_1_stage2_unit4_relu1      -> part_1_stage2_unit4_relu1
-461, 	op:Convolution         , name:part_1_stage2_unit4_conv2      -> part_1_stage2_unit4_conv2
-{u'inputs': [[459, 0, 0], [460, 0, 0]], u'name': u'part_1_stage2_unit4_conv2', 'bottom': ['part_1_stage2_unit4_relu1'], 'top': u'part_1_stage2_unit4_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage2_unit4_conv2_weight'], u'op': u'Convolution'}
-466, 	op:BatchNorm           , name:part_1_stage2_unit4_bn2        -> part_1_stage2_unit4_bn2
-467, 	op:Activation          , name:part_1_stage2_unit4_relu2      -> part_1_stage2_unit4_relu2
-468, 	op:elemwise_add        , name:_plus22                        -> _plus22
-470, 	op:Convolution         , name:part_1_stage3_unit1_conv1      -> part_1_stage3_unit1_conv1
-{u'inputs': [[468, 0, 0], [469, 0, 0]], u'name': u'part_1_stage3_unit1_conv1', 'bottom': ['_plus22'], 'top': u'part_1_stage3_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage3_unit1_conv1_weight'], u'op': u'Convolution'}
-475, 	op:BatchNorm           , name:part_1_stage3_unit1_bn1        -> part_1_stage3_unit1_bn1
-476, 	op:Activation          , name:part_1_stage3_unit1_relu1      -> part_1_stage3_unit1_relu1
-478, 	op:Convolution         , name:part_1_stage3_unit1_conv2      -> part_1_stage3_unit1_conv2
-{u'inputs': [[476, 0, 0], [477, 0, 0]], u'name': u'part_1_stage3_unit1_conv2', 'bottom': ['part_1_stage3_unit1_relu1'], 'top': u'part_1_stage3_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage3_unit1_conv2_weight'], u'op': u'Convolution'}
-483, 	op:BatchNorm           , name:part_1_stage3_unit1_bn2        -> part_1_stage3_unit1_bn2
-484, 	op:Activation          , name:part_1_stage3_unit1_relu2      -> part_1_stage3_unit1_relu2
-486, 	op:Convolution         , name:part_1_stage3_unit1_conv_proj  -> part_1_stage3_unit1_conv_proj
-{u'inputs': [[468, 0, 0], [485, 0, 0]], u'name': u'part_1_stage3_unit1_conv_proj', 'bottom': ['_plus22'], 'top': u'part_1_stage3_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage3_unit1_conv_proj_weight'], u'op': u'Convolution'}
-491, 	op:BatchNorm           , name:part_1_stage3_unit1_bn_proj    -> part_1_stage3_unit1_bn_proj
-492, 	op:Activation          , name:part_1_stage3_unit1_relu_proj  -> part_1_stage3_unit1_relu_proj
-493, 	op:elemwise_add        , name:_plus23                        -> _plus23
-495, 	op:Convolution         , name:part_1_stage3_unit2_conv1      -> part_1_stage3_unit2_conv1
-{u'inputs': [[493, 0, 0], [494, 0, 0]], u'name': u'part_1_stage3_unit2_conv1', 'bottom': ['_plus23'], 'top': u'part_1_stage3_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage3_unit2_conv1_weight'], u'op': u'Convolution'}
-500, 	op:BatchNorm           , name:part_1_stage3_unit2_bn1        -> part_1_stage3_unit2_bn1
-501, 	op:Activation          , name:part_1_stage3_unit2_relu1      -> part_1_stage3_unit2_relu1
-503, 	op:Convolution         , name:part_1_stage3_unit2_conv2      -> part_1_stage3_unit2_conv2
-{u'inputs': [[501, 0, 0], [502, 0, 0]], u'name': u'part_1_stage3_unit2_conv2', 'bottom': ['part_1_stage3_unit2_relu1'], 'top': u'part_1_stage3_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage3_unit2_conv2_weight'], u'op': u'Convolution'}
-508, 	op:BatchNorm           , name:part_1_stage3_unit2_bn2        -> part_1_stage3_unit2_bn2
-509, 	op:Activation          , name:part_1_stage3_unit2_relu2      -> part_1_stage3_unit2_relu2
-510, 	op:elemwise_add        , name:_plus24                        -> _plus24
-512, 	op:Convolution         , name:part_1_stage3_unit3_conv1      -> part_1_stage3_unit3_conv1
-{u'inputs': [[510, 0, 0], [511, 0, 0]], u'name': u'part_1_stage3_unit3_conv1', 'bottom': ['_plus24'], 'top': u'part_1_stage3_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage3_unit3_conv1_weight'], u'op': u'Convolution'}
-517, 	op:BatchNorm           , name:part_1_stage3_unit3_bn1        -> part_1_stage3_unit3_bn1
-518, 	op:Activation          , name:part_1_stage3_unit3_relu1      -> part_1_stage3_unit3_relu1
-520, 	op:Convolution         , name:part_1_stage3_unit3_conv2      -> part_1_stage3_unit3_conv2
-{u'inputs': [[518, 0, 0], [519, 0, 0]], u'name': u'part_1_stage3_unit3_conv2', 'bottom': ['part_1_stage3_unit3_relu1'], 'top': u'part_1_stage3_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage3_unit3_conv2_weight'], u'op': u'Convolution'}
-525, 	op:BatchNorm           , name:part_1_stage3_unit3_bn2        -> part_1_stage3_unit3_bn2
-526, 	op:Activation          , name:part_1_stage3_unit3_relu2      -> part_1_stage3_unit3_relu2
-527, 	op:elemwise_add        , name:_plus25                        -> _plus25
-529, 	op:Convolution         , name:part_1_stage3_unit4_conv1      -> part_1_stage3_unit4_conv1
-{u'inputs': [[527, 0, 0], [528, 0, 0]], u'name': u'part_1_stage3_unit4_conv1', 'bottom': ['_plus25'], 'top': u'part_1_stage3_unit4_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage3_unit4_conv1_weight'], u'op': u'Convolution'}
-534, 	op:BatchNorm           , name:part_1_stage3_unit4_bn1        -> part_1_stage3_unit4_bn1
-535, 	op:Activation          , name:part_1_stage3_unit4_relu1      -> part_1_stage3_unit4_relu1
-537, 	op:Convolution         , name:part_1_stage3_unit4_conv2      -> part_1_stage3_unit4_conv2
-{u'inputs': [[535, 0, 0], [536, 0, 0]], u'name': u'part_1_stage3_unit4_conv2', 'bottom': ['part_1_stage3_unit4_relu1'], 'top': u'part_1_stage3_unit4_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage3_unit4_conv2_weight'], u'op': u'Convolution'}
-542, 	op:BatchNorm           , name:part_1_stage3_unit4_bn2        -> part_1_stage3_unit4_bn2
-543, 	op:Activation          , name:part_1_stage3_unit4_relu2      -> part_1_stage3_unit4_relu2
-544, 	op:elemwise_add        , name:_plus26                        -> _plus26
-546, 	op:Convolution         , name:part_1_stage3_unit5_conv1      -> part_1_stage3_unit5_conv1
-{u'inputs': [[544, 0, 0], [545, 0, 0]], u'name': u'part_1_stage3_unit5_conv1', 'bottom': ['_plus26'], 'top': u'part_1_stage3_unit5_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage3_unit5_conv1_weight'], u'op': u'Convolution'}
-551, 	op:BatchNorm           , name:part_1_stage3_unit5_bn1        -> part_1_stage3_unit5_bn1
-552, 	op:Activation          , name:part_1_stage3_unit5_relu1      -> part_1_stage3_unit5_relu1
-554, 	op:Convolution         , name:part_1_stage3_unit5_conv2      -> part_1_stage3_unit5_conv2
-{u'inputs': [[552, 0, 0], [553, 0, 0]], u'name': u'part_1_stage3_unit5_conv2', 'bottom': ['part_1_stage3_unit5_relu1'], 'top': u'part_1_stage3_unit5_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage3_unit5_conv2_weight'], u'op': u'Convolution'}
-559, 	op:BatchNorm           , name:part_1_stage3_unit5_bn2        -> part_1_stage3_unit5_bn2
-560, 	op:Activation          , name:part_1_stage3_unit5_relu2      -> part_1_stage3_unit5_relu2
-561, 	op:elemwise_add        , name:_plus27                        -> _plus27
-563, 	op:Convolution         , name:part_1_stage3_unit6_conv1      -> part_1_stage3_unit6_conv1
-{u'inputs': [[561, 0, 0], [562, 0, 0]], u'name': u'part_1_stage3_unit6_conv1', 'bottom': ['_plus27'], 'top': u'part_1_stage3_unit6_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage3_unit6_conv1_weight'], u'op': u'Convolution'}
-568, 	op:BatchNorm           , name:part_1_stage3_unit6_bn1        -> part_1_stage3_unit6_bn1
-569, 	op:Activation          , name:part_1_stage3_unit6_relu1      -> part_1_stage3_unit6_relu1
-571, 	op:Convolution         , name:part_1_stage3_unit6_conv2      -> part_1_stage3_unit6_conv2
-{u'inputs': [[569, 0, 0], [570, 0, 0]], u'name': u'part_1_stage3_unit6_conv2', 'bottom': ['part_1_stage3_unit6_relu1'], 'top': u'part_1_stage3_unit6_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage3_unit6_conv2_weight'], u'op': u'Convolution'}
-576, 	op:BatchNorm           , name:part_1_stage3_unit6_bn2        -> part_1_stage3_unit6_bn2
-577, 	op:Activation          , name:part_1_stage3_unit6_relu2      -> part_1_stage3_unit6_relu2
-578, 	op:elemwise_add        , name:_plus28                        -> _plus28
-580, 	op:Convolution         , name:part_1_stage4_unit1_conv1      -> part_1_stage4_unit1_conv1
-{u'inputs': [[578, 0, 0], [579, 0, 0]], u'name': u'part_1_stage4_unit1_conv1', 'bottom': ['_plus28'], 'top': u'part_1_stage4_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage4_unit1_conv1_weight'], u'op': u'Convolution'}
-585, 	op:BatchNorm           , name:part_1_stage4_unit1_bn1        -> part_1_stage4_unit1_bn1
-586, 	op:Activation          , name:part_1_stage4_unit1_relu1      -> part_1_stage4_unit1_relu1
-588, 	op:Convolution         , name:part_1_stage4_unit1_conv2      -> part_1_stage4_unit1_conv2
-{u'inputs': [[586, 0, 0], [587, 0, 0]], u'name': u'part_1_stage4_unit1_conv2', 'bottom': ['part_1_stage4_unit1_relu1'], 'top': u'part_1_stage4_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage4_unit1_conv2_weight'], u'op': u'Convolution'}
-593, 	op:BatchNorm           , name:part_1_stage4_unit1_bn2        -> part_1_stage4_unit1_bn2
-594, 	op:Activation          , name:part_1_stage4_unit1_relu2      -> part_1_stage4_unit1_relu2
-596, 	op:Convolution         , name:part_1_stage4_unit1_conv_proj  -> part_1_stage4_unit1_conv_proj
-{u'inputs': [[578, 0, 0], [595, 0, 0]], u'name': u'part_1_stage4_unit1_conv_proj', 'bottom': ['_plus28'], 'top': u'part_1_stage4_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage4_unit1_conv_proj_weight'], u'op': u'Convolution'}
-601, 	op:BatchNorm           , name:part_1_stage4_unit1_bn_proj    -> part_1_stage4_unit1_bn_proj
-602, 	op:Activation          , name:part_1_stage4_unit1_relu_proj  -> part_1_stage4_unit1_relu_proj
-603, 	op:elemwise_add        , name:_plus29                        -> _plus29
-605, 	op:Convolution         , name:part_1_stage4_unit2_conv1      -> part_1_stage4_unit2_conv1
-{u'inputs': [[603, 0, 0], [604, 0, 0]], u'name': u'part_1_stage4_unit2_conv1', 'bottom': ['_plus29'], 'top': u'part_1_stage4_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage4_unit2_conv1_weight'], u'op': u'Convolution'}
-610, 	op:BatchNorm           , name:part_1_stage4_unit2_bn1        -> part_1_stage4_unit2_bn1
-611, 	op:Activation          , name:part_1_stage4_unit2_relu1      -> part_1_stage4_unit2_relu1
-613, 	op:Convolution         , name:part_1_stage4_unit2_conv2      -> part_1_stage4_unit2_conv2
-{u'inputs': [[611, 0, 0], [612, 0, 0]], u'name': u'part_1_stage4_unit2_conv2', 'bottom': ['part_1_stage4_unit2_relu1'], 'top': u'part_1_stage4_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage4_unit2_conv2_weight'], u'op': u'Convolution'}
-618, 	op:BatchNorm           , name:part_1_stage4_unit2_bn2        -> part_1_stage4_unit2_bn2
-619, 	op:Activation          , name:part_1_stage4_unit2_relu2      -> part_1_stage4_unit2_relu2
-620, 	op:elemwise_add        , name:_plus30                        -> _plus30
-622, 	op:Convolution         , name:part_1_stage4_unit3_conv1      -> part_1_stage4_unit3_conv1
-{u'inputs': [[620, 0, 0], [621, 0, 0]], u'name': u'part_1_stage4_unit3_conv1', 'bottom': ['_plus30'], 'top': u'part_1_stage4_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage4_unit3_conv1_weight'], u'op': u'Convolution'}
-627, 	op:BatchNorm           , name:part_1_stage4_unit3_bn1        -> part_1_stage4_unit3_bn1
-628, 	op:Activation          , name:part_1_stage4_unit3_relu1      -> part_1_stage4_unit3_relu1
-630, 	op:Convolution         , name:part_1_stage4_unit3_conv2      -> part_1_stage4_unit3_conv2
-{u'inputs': [[628, 0, 0], [629, 0, 0]], u'name': u'part_1_stage4_unit3_conv2', 'bottom': ['part_1_stage4_unit3_relu1'], 'top': u'part_1_stage4_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_1_stage4_unit3_conv2_weight'], u'op': u'Convolution'}
-635, 	op:BatchNorm           , name:part_1_stage4_unit3_bn2        -> part_1_stage4_unit3_bn2
-636, 	op:Activation          , name:part_1_stage4_unit3_relu2      -> part_1_stage4_unit3_relu2
-637, 	op:elemwise_add        , name:_plus31                        -> _plus31
-638, 	op:Pooling             , name:part_1_pool1                   -> part_1_pool1
-639, 	op:Flatten             , name:part_1_flat_pool               -> part_1_flat_pool
-644, 	op:BatchNorm           , name:part_1_bn_pool                 -> part_1_bn_pool
-647, 	op:FullyConnected      , name:part_1_flat                    -> part_1_flat
-649, 	op:Convolution         , name:part_2_conv0                   -> part_2_conv0
-{u'inputs': [[1, 2, 0], [648, 0, 0]], u'name': u'part_2_conv0', 'bottom': ['data_slice'], 'top': u'part_2_conv0', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_conv0_weight'], u'op': u'Convolution'}
-654, 	op:BatchNorm           , name:part_2_bn0                     -> part_2_bn0
-655, 	op:Activation          , name:part_2_relu0                   -> part_2_relu0
-656, 	op:Pooling             , name:pooling2                       -> pooling2
-658, 	op:Convolution         , name:part_2_stage1_unit1_conv1      -> part_2_stage1_unit1_conv1
-{u'inputs': [[656, 0, 0], [657, 0, 0]], u'name': u'part_2_stage1_unit1_conv1', 'bottom': ['pooling2'], 'top': u'part_2_stage1_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage1_unit1_conv1_weight'], u'op': u'Convolution'}
-663, 	op:BatchNorm           , name:part_2_stage1_unit1_bn1        -> part_2_stage1_unit1_bn1
-664, 	op:Activation          , name:part_2_stage1_unit1_relu1      -> part_2_stage1_unit1_relu1
-666, 	op:Convolution         , name:part_2_stage1_unit1_conv2      -> part_2_stage1_unit1_conv2
-{u'inputs': [[664, 0, 0], [665, 0, 0]], u'name': u'part_2_stage1_unit1_conv2', 'bottom': ['part_2_stage1_unit1_relu1'], 'top': u'part_2_stage1_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage1_unit1_conv2_weight'], u'op': u'Convolution'}
-671, 	op:BatchNorm           , name:part_2_stage1_unit1_bn2        -> part_2_stage1_unit1_bn2
-672, 	op:Activation          , name:part_2_stage1_unit1_relu2      -> part_2_stage1_unit1_relu2
-674, 	op:Convolution         , name:part_2_stage1_unit1_conv_proj  -> part_2_stage1_unit1_conv_proj
-{u'inputs': [[656, 0, 0], [673, 0, 0]], u'name': u'part_2_stage1_unit1_conv_proj', 'bottom': ['pooling2'], 'top': u'part_2_stage1_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage1_unit1_conv_proj_weight'], u'op': u'Convolution'}
-679, 	op:BatchNorm           , name:part_2_stage1_unit1_bn_proj    -> part_2_stage1_unit1_bn_proj
-680, 	op:Activation          , name:part_2_stage1_unit1_relu_proj  -> part_2_stage1_unit1_relu_proj
-681, 	op:elemwise_add        , name:_plus32                        -> _plus32
-683, 	op:Convolution         , name:part_2_stage1_unit2_conv1      -> part_2_stage1_unit2_conv1
-{u'inputs': [[681, 0, 0], [682, 0, 0]], u'name': u'part_2_stage1_unit2_conv1', 'bottom': ['_plus32'], 'top': u'part_2_stage1_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage1_unit2_conv1_weight'], u'op': u'Convolution'}
-688, 	op:BatchNorm           , name:part_2_stage1_unit2_bn1        -> part_2_stage1_unit2_bn1
-689, 	op:Activation          , name:part_2_stage1_unit2_relu1      -> part_2_stage1_unit2_relu1
-691, 	op:Convolution         , name:part_2_stage1_unit2_conv2      -> part_2_stage1_unit2_conv2
-{u'inputs': [[689, 0, 0], [690, 0, 0]], u'name': u'part_2_stage1_unit2_conv2', 'bottom': ['part_2_stage1_unit2_relu1'], 'top': u'part_2_stage1_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage1_unit2_conv2_weight'], u'op': u'Convolution'}
-696, 	op:BatchNorm           , name:part_2_stage1_unit2_bn2        -> part_2_stage1_unit2_bn2
-697, 	op:Activation          , name:part_2_stage1_unit2_relu2      -> part_2_stage1_unit2_relu2
-698, 	op:elemwise_add        , name:_plus33                        -> _plus33
-700, 	op:Convolution         , name:part_2_stage1_unit3_conv1      -> part_2_stage1_unit3_conv1
-{u'inputs': [[698, 0, 0], [699, 0, 0]], u'name': u'part_2_stage1_unit3_conv1', 'bottom': ['_plus33'], 'top': u'part_2_stage1_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage1_unit3_conv1_weight'], u'op': u'Convolution'}
-705, 	op:BatchNorm           , name:part_2_stage1_unit3_bn1        -> part_2_stage1_unit3_bn1
-706, 	op:Activation          , name:part_2_stage1_unit3_relu1      -> part_2_stage1_unit3_relu1
-708, 	op:Convolution         , name:part_2_stage1_unit3_conv2      -> part_2_stage1_unit3_conv2
-{u'inputs': [[706, 0, 0], [707, 0, 0]], u'name': u'part_2_stage1_unit3_conv2', 'bottom': ['part_2_stage1_unit3_relu1'], 'top': u'part_2_stage1_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage1_unit3_conv2_weight'], u'op': u'Convolution'}
-713, 	op:BatchNorm           , name:part_2_stage1_unit3_bn2        -> part_2_stage1_unit3_bn2
-714, 	op:Activation          , name:part_2_stage1_unit3_relu2      -> part_2_stage1_unit3_relu2
-715, 	op:elemwise_add        , name:_plus34                        -> _plus34
-717, 	op:Convolution         , name:part_2_stage2_unit1_conv1      -> part_2_stage2_unit1_conv1
-{u'inputs': [[715, 0, 0], [716, 0, 0]], u'name': u'part_2_stage2_unit1_conv1', 'bottom': ['_plus34'], 'top': u'part_2_stage2_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage2_unit1_conv1_weight'], u'op': u'Convolution'}
-722, 	op:BatchNorm           , name:part_2_stage2_unit1_bn1        -> part_2_stage2_unit1_bn1
-723, 	op:Activation          , name:part_2_stage2_unit1_relu1      -> part_2_stage2_unit1_relu1
-725, 	op:Convolution         , name:part_2_stage2_unit1_conv2      -> part_2_stage2_unit1_conv2
-{u'inputs': [[723, 0, 0], [724, 0, 0]], u'name': u'part_2_stage2_unit1_conv2', 'bottom': ['part_2_stage2_unit1_relu1'], 'top': u'part_2_stage2_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage2_unit1_conv2_weight'], u'op': u'Convolution'}
-730, 	op:BatchNorm           , name:part_2_stage2_unit1_bn2        -> part_2_stage2_unit1_bn2
-731, 	op:Activation          , name:part_2_stage2_unit1_relu2      -> part_2_stage2_unit1_relu2
-733, 	op:Convolution         , name:part_2_stage2_unit1_conv_proj  -> part_2_stage2_unit1_conv_proj
-{u'inputs': [[715, 0, 0], [732, 0, 0]], u'name': u'part_2_stage2_unit1_conv_proj', 'bottom': ['_plus34'], 'top': u'part_2_stage2_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage2_unit1_conv_proj_weight'], u'op': u'Convolution'}
-738, 	op:BatchNorm           , name:part_2_stage2_unit1_bn_proj    -> part_2_stage2_unit1_bn_proj
-739, 	op:Activation          , name:part_2_stage2_unit1_relu_proj  -> part_2_stage2_unit1_relu_proj
-740, 	op:elemwise_add        , name:_plus35                        -> _plus35
-742, 	op:Convolution         , name:part_2_stage2_unit2_conv1      -> part_2_stage2_unit2_conv1
-{u'inputs': [[740, 0, 0], [741, 0, 0]], u'name': u'part_2_stage2_unit2_conv1', 'bottom': ['_plus35'], 'top': u'part_2_stage2_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage2_unit2_conv1_weight'], u'op': u'Convolution'}
-747, 	op:BatchNorm           , name:part_2_stage2_unit2_bn1        -> part_2_stage2_unit2_bn1
-748, 	op:Activation          , name:part_2_stage2_unit2_relu1      -> part_2_stage2_unit2_relu1
-750, 	op:Convolution         , name:part_2_stage2_unit2_conv2      -> part_2_stage2_unit2_conv2
-{u'inputs': [[748, 0, 0], [749, 0, 0]], u'name': u'part_2_stage2_unit2_conv2', 'bottom': ['part_2_stage2_unit2_relu1'], 'top': u'part_2_stage2_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage2_unit2_conv2_weight'], u'op': u'Convolution'}
-755, 	op:BatchNorm           , name:part_2_stage2_unit2_bn2        -> part_2_stage2_unit2_bn2
-756, 	op:Activation          , name:part_2_stage2_unit2_relu2      -> part_2_stage2_unit2_relu2
-757, 	op:elemwise_add        , name:_plus36                        -> _plus36
-759, 	op:Convolution         , name:part_2_stage2_unit3_conv1      -> part_2_stage2_unit3_conv1
-{u'inputs': [[757, 0, 0], [758, 0, 0]], u'name': u'part_2_stage2_unit3_conv1', 'bottom': ['_plus36'], 'top': u'part_2_stage2_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage2_unit3_conv1_weight'], u'op': u'Convolution'}
-764, 	op:BatchNorm           , name:part_2_stage2_unit3_bn1        -> part_2_stage2_unit3_bn1
-765, 	op:Activation          , name:part_2_stage2_unit3_relu1      -> part_2_stage2_unit3_relu1
-767, 	op:Convolution         , name:part_2_stage2_unit3_conv2      -> part_2_stage2_unit3_conv2
-{u'inputs': [[765, 0, 0], [766, 0, 0]], u'name': u'part_2_stage2_unit3_conv2', 'bottom': ['part_2_stage2_unit3_relu1'], 'top': u'part_2_stage2_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage2_unit3_conv2_weight'], u'op': u'Convolution'}
-772, 	op:BatchNorm           , name:part_2_stage2_unit3_bn2        -> part_2_stage2_unit3_bn2
-773, 	op:Activation          , name:part_2_stage2_unit3_relu2      -> part_2_stage2_unit3_relu2
-774, 	op:elemwise_add        , name:_plus37                        -> _plus37
-776, 	op:Convolution         , name:part_2_stage2_unit4_conv1      -> part_2_stage2_unit4_conv1
-{u'inputs': [[774, 0, 0], [775, 0, 0]], u'name': u'part_2_stage2_unit4_conv1', 'bottom': ['_plus37'], 'top': u'part_2_stage2_unit4_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage2_unit4_conv1_weight'], u'op': u'Convolution'}
-781, 	op:BatchNorm           , name:part_2_stage2_unit4_bn1        -> part_2_stage2_unit4_bn1
-782, 	op:Activation          , name:part_2_stage2_unit4_relu1      -> part_2_stage2_unit4_relu1
-784, 	op:Convolution         , name:part_2_stage2_unit4_conv2      -> part_2_stage2_unit4_conv2
-{u'inputs': [[782, 0, 0], [783, 0, 0]], u'name': u'part_2_stage2_unit4_conv2', 'bottom': ['part_2_stage2_unit4_relu1'], 'top': u'part_2_stage2_unit4_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage2_unit4_conv2_weight'], u'op': u'Convolution'}
-789, 	op:BatchNorm           , name:part_2_stage2_unit4_bn2        -> part_2_stage2_unit4_bn2
-790, 	op:Activation          , name:part_2_stage2_unit4_relu2      -> part_2_stage2_unit4_relu2
-791, 	op:elemwise_add        , name:_plus38                        -> _plus38
-793, 	op:Convolution         , name:part_2_stage3_unit1_conv1      -> part_2_stage3_unit1_conv1
-{u'inputs': [[791, 0, 0], [792, 0, 0]], u'name': u'part_2_stage3_unit1_conv1', 'bottom': ['_plus38'], 'top': u'part_2_stage3_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage3_unit1_conv1_weight'], u'op': u'Convolution'}
-798, 	op:BatchNorm           , name:part_2_stage3_unit1_bn1        -> part_2_stage3_unit1_bn1
-799, 	op:Activation          , name:part_2_stage3_unit1_relu1      -> part_2_stage3_unit1_relu1
-801, 	op:Convolution         , name:part_2_stage3_unit1_conv2      -> part_2_stage3_unit1_conv2
-{u'inputs': [[799, 0, 0], [800, 0, 0]], u'name': u'part_2_stage3_unit1_conv2', 'bottom': ['part_2_stage3_unit1_relu1'], 'top': u'part_2_stage3_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage3_unit1_conv2_weight'], u'op': u'Convolution'}
-806, 	op:BatchNorm           , name:part_2_stage3_unit1_bn2        -> part_2_stage3_unit1_bn2
-807, 	op:Activation          , name:part_2_stage3_unit1_relu2      -> part_2_stage3_unit1_relu2
-809, 	op:Convolution         , name:part_2_stage3_unit1_conv_proj  -> part_2_stage3_unit1_conv_proj
-{u'inputs': [[791, 0, 0], [808, 0, 0]], u'name': u'part_2_stage3_unit1_conv_proj', 'bottom': ['_plus38'], 'top': u'part_2_stage3_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage3_unit1_conv_proj_weight'], u'op': u'Convolution'}
-814, 	op:BatchNorm           , name:part_2_stage3_unit1_bn_proj    -> part_2_stage3_unit1_bn_proj
-815, 	op:Activation          , name:part_2_stage3_unit1_relu_proj  -> part_2_stage3_unit1_relu_proj
-816, 	op:elemwise_add        , name:_plus39                        -> _plus39
-818, 	op:Convolution         , name:part_2_stage3_unit2_conv1      -> part_2_stage3_unit2_conv1
-{u'inputs': [[816, 0, 0], [817, 0, 0]], u'name': u'part_2_stage3_unit2_conv1', 'bottom': ['_plus39'], 'top': u'part_2_stage3_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage3_unit2_conv1_weight'], u'op': u'Convolution'}
-823, 	op:BatchNorm           , name:part_2_stage3_unit2_bn1        -> part_2_stage3_unit2_bn1
-824, 	op:Activation          , name:part_2_stage3_unit2_relu1      -> part_2_stage3_unit2_relu1
-826, 	op:Convolution         , name:part_2_stage3_unit2_conv2      -> part_2_stage3_unit2_conv2
-{u'inputs': [[824, 0, 0], [825, 0, 0]], u'name': u'part_2_stage3_unit2_conv2', 'bottom': ['part_2_stage3_unit2_relu1'], 'top': u'part_2_stage3_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage3_unit2_conv2_weight'], u'op': u'Convolution'}
-831, 	op:BatchNorm           , name:part_2_stage3_unit2_bn2        -> part_2_stage3_unit2_bn2
-832, 	op:Activation          , name:part_2_stage3_unit2_relu2      -> part_2_stage3_unit2_relu2
-833, 	op:elemwise_add        , name:_plus40                        -> _plus40
-835, 	op:Convolution         , name:part_2_stage3_unit3_conv1      -> part_2_stage3_unit3_conv1
-{u'inputs': [[833, 0, 0], [834, 0, 0]], u'name': u'part_2_stage3_unit3_conv1', 'bottom': ['_plus40'], 'top': u'part_2_stage3_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage3_unit3_conv1_weight'], u'op': u'Convolution'}
-840, 	op:BatchNorm           , name:part_2_stage3_unit3_bn1        -> part_2_stage3_unit3_bn1
-841, 	op:Activation          , name:part_2_stage3_unit3_relu1      -> part_2_stage3_unit3_relu1
-843, 	op:Convolution         , name:part_2_stage3_unit3_conv2      -> part_2_stage3_unit3_conv2
-{u'inputs': [[841, 0, 0], [842, 0, 0]], u'name': u'part_2_stage3_unit3_conv2', 'bottom': ['part_2_stage3_unit3_relu1'], 'top': u'part_2_stage3_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage3_unit3_conv2_weight'], u'op': u'Convolution'}
-848, 	op:BatchNorm           , name:part_2_stage3_unit3_bn2        -> part_2_stage3_unit3_bn2
-849, 	op:Activation          , name:part_2_stage3_unit3_relu2      -> part_2_stage3_unit3_relu2
-850, 	op:elemwise_add        , name:_plus41                        -> _plus41
-852, 	op:Convolution         , name:part_2_stage3_unit4_conv1      -> part_2_stage3_unit4_conv1
-{u'inputs': [[850, 0, 0], [851, 0, 0]], u'name': u'part_2_stage3_unit4_conv1', 'bottom': ['_plus41'], 'top': u'part_2_stage3_unit4_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage3_unit4_conv1_weight'], u'op': u'Convolution'}
-857, 	op:BatchNorm           , name:part_2_stage3_unit4_bn1        -> part_2_stage3_unit4_bn1
-858, 	op:Activation          , name:part_2_stage3_unit4_relu1      -> part_2_stage3_unit4_relu1
-860, 	op:Convolution         , name:part_2_stage3_unit4_conv2      -> part_2_stage3_unit4_conv2
-{u'inputs': [[858, 0, 0], [859, 0, 0]], u'name': u'part_2_stage3_unit4_conv2', 'bottom': ['part_2_stage3_unit4_relu1'], 'top': u'part_2_stage3_unit4_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage3_unit4_conv2_weight'], u'op': u'Convolution'}
-865, 	op:BatchNorm           , name:part_2_stage3_unit4_bn2        -> part_2_stage3_unit4_bn2
-866, 	op:Activation          , name:part_2_stage3_unit4_relu2      -> part_2_stage3_unit4_relu2
-867, 	op:elemwise_add        , name:_plus42                        -> _plus42
-869, 	op:Convolution         , name:part_2_stage3_unit5_conv1      -> part_2_stage3_unit5_conv1
-{u'inputs': [[867, 0, 0], [868, 0, 0]], u'name': u'part_2_stage3_unit5_conv1', 'bottom': ['_plus42'], 'top': u'part_2_stage3_unit5_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage3_unit5_conv1_weight'], u'op': u'Convolution'}
-874, 	op:BatchNorm           , name:part_2_stage3_unit5_bn1        -> part_2_stage3_unit5_bn1
-875, 	op:Activation          , name:part_2_stage3_unit5_relu1      -> part_2_stage3_unit5_relu1
-877, 	op:Convolution         , name:part_2_stage3_unit5_conv2      -> part_2_stage3_unit5_conv2
-{u'inputs': [[875, 0, 0], [876, 0, 0]], u'name': u'part_2_stage3_unit5_conv2', 'bottom': ['part_2_stage3_unit5_relu1'], 'top': u'part_2_stage3_unit5_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage3_unit5_conv2_weight'], u'op': u'Convolution'}
-882, 	op:BatchNorm           , name:part_2_stage3_unit5_bn2        -> part_2_stage3_unit5_bn2
-883, 	op:Activation          , name:part_2_stage3_unit5_relu2      -> part_2_stage3_unit5_relu2
-884, 	op:elemwise_add        , name:_plus43                        -> _plus43
-886, 	op:Convolution         , name:part_2_stage3_unit6_conv1      -> part_2_stage3_unit6_conv1
-{u'inputs': [[884, 0, 0], [885, 0, 0]], u'name': u'part_2_stage3_unit6_conv1', 'bottom': ['_plus43'], 'top': u'part_2_stage3_unit6_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage3_unit6_conv1_weight'], u'op': u'Convolution'}
-891, 	op:BatchNorm           , name:part_2_stage3_unit6_bn1        -> part_2_stage3_unit6_bn1
-892, 	op:Activation          , name:part_2_stage3_unit6_relu1      -> part_2_stage3_unit6_relu1
-894, 	op:Convolution         , name:part_2_stage3_unit6_conv2      -> part_2_stage3_unit6_conv2
-{u'inputs': [[892, 0, 0], [893, 0, 0]], u'name': u'part_2_stage3_unit6_conv2', 'bottom': ['part_2_stage3_unit6_relu1'], 'top': u'part_2_stage3_unit6_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage3_unit6_conv2_weight'], u'op': u'Convolution'}
-899, 	op:BatchNorm           , name:part_2_stage3_unit6_bn2        -> part_2_stage3_unit6_bn2
-900, 	op:Activation          , name:part_2_stage3_unit6_relu2      -> part_2_stage3_unit6_relu2
-901, 	op:elemwise_add        , name:_plus44                        -> _plus44
-903, 	op:Convolution         , name:part_2_stage4_unit1_conv1      -> part_2_stage4_unit1_conv1
-{u'inputs': [[901, 0, 0], [902, 0, 0]], u'name': u'part_2_stage4_unit1_conv1', 'bottom': ['_plus44'], 'top': u'part_2_stage4_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage4_unit1_conv1_weight'], u'op': u'Convolution'}
-908, 	op:BatchNorm           , name:part_2_stage4_unit1_bn1        -> part_2_stage4_unit1_bn1
-909, 	op:Activation          , name:part_2_stage4_unit1_relu1      -> part_2_stage4_unit1_relu1
-911, 	op:Convolution         , name:part_2_stage4_unit1_conv2      -> part_2_stage4_unit1_conv2
-{u'inputs': [[909, 0, 0], [910, 0, 0]], u'name': u'part_2_stage4_unit1_conv2', 'bottom': ['part_2_stage4_unit1_relu1'], 'top': u'part_2_stage4_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage4_unit1_conv2_weight'], u'op': u'Convolution'}
-916, 	op:BatchNorm           , name:part_2_stage4_unit1_bn2        -> part_2_stage4_unit1_bn2
-917, 	op:Activation          , name:part_2_stage4_unit1_relu2      -> part_2_stage4_unit1_relu2
-919, 	op:Convolution         , name:part_2_stage4_unit1_conv_proj  -> part_2_stage4_unit1_conv_proj
-{u'inputs': [[901, 0, 0], [918, 0, 0]], u'name': u'part_2_stage4_unit1_conv_proj', 'bottom': ['_plus44'], 'top': u'part_2_stage4_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage4_unit1_conv_proj_weight'], u'op': u'Convolution'}
-924, 	op:BatchNorm           , name:part_2_stage4_unit1_bn_proj    -> part_2_stage4_unit1_bn_proj
-925, 	op:Activation          , name:part_2_stage4_unit1_relu_proj  -> part_2_stage4_unit1_relu_proj
-926, 	op:elemwise_add        , name:_plus45                        -> _plus45
-928, 	op:Convolution         , name:part_2_stage4_unit2_conv1      -> part_2_stage4_unit2_conv1
-{u'inputs': [[926, 0, 0], [927, 0, 0]], u'name': u'part_2_stage4_unit2_conv1', 'bottom': ['_plus45'], 'top': u'part_2_stage4_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage4_unit2_conv1_weight'], u'op': u'Convolution'}
-933, 	op:BatchNorm           , name:part_2_stage4_unit2_bn1        -> part_2_stage4_unit2_bn1
-934, 	op:Activation          , name:part_2_stage4_unit2_relu1      -> part_2_stage4_unit2_relu1
-936, 	op:Convolution         , name:part_2_stage4_unit2_conv2      -> part_2_stage4_unit2_conv2
-{u'inputs': [[934, 0, 0], [935, 0, 0]], u'name': u'part_2_stage4_unit2_conv2', 'bottom': ['part_2_stage4_unit2_relu1'], 'top': u'part_2_stage4_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage4_unit2_conv2_weight'], u'op': u'Convolution'}
-941, 	op:BatchNorm           , name:part_2_stage4_unit2_bn2        -> part_2_stage4_unit2_bn2
-942, 	op:Activation          , name:part_2_stage4_unit2_relu2      -> part_2_stage4_unit2_relu2
-943, 	op:elemwise_add        , name:_plus46                        -> _plus46
-945, 	op:Convolution         , name:part_2_stage4_unit3_conv1      -> part_2_stage4_unit3_conv1
-{u'inputs': [[943, 0, 0], [944, 0, 0]], u'name': u'part_2_stage4_unit3_conv1', 'bottom': ['_plus46'], 'top': u'part_2_stage4_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage4_unit3_conv1_weight'], u'op': u'Convolution'}
-950, 	op:BatchNorm           , name:part_2_stage4_unit3_bn1        -> part_2_stage4_unit3_bn1
-951, 	op:Activation          , name:part_2_stage4_unit3_relu1      -> part_2_stage4_unit3_relu1
-953, 	op:Convolution         , name:part_2_stage4_unit3_conv2      -> part_2_stage4_unit3_conv2
-{u'inputs': [[951, 0, 0], [952, 0, 0]], u'name': u'part_2_stage4_unit3_conv2', 'bottom': ['part_2_stage4_unit3_relu1'], 'top': u'part_2_stage4_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_2_stage4_unit3_conv2_weight'], u'op': u'Convolution'}
-958, 	op:BatchNorm           , name:part_2_stage4_unit3_bn2        -> part_2_stage4_unit3_bn2
-959, 	op:Activation          , name:part_2_stage4_unit3_relu2      -> part_2_stage4_unit3_relu2
-960, 	op:elemwise_add        , name:_plus47                        -> _plus47
-961, 	op:Pooling             , name:part_2_pool1                   -> part_2_pool1
-962, 	op:Flatten             , name:part_2_flat_pool               -> part_2_flat_pool
-967, 	op:BatchNorm           , name:part_2_bn_pool                 -> part_2_bn_pool
-970, 	op:FullyConnected      , name:part_2_flat                    -> part_2_flat
-972, 	op:Convolution         , name:part_3_conv0                   -> part_3_conv0
-{u'inputs': [[1, 3, 0], [971, 0, 0]], u'name': u'part_3_conv0', 'bottom': ['data_slice'], 'top': u'part_3_conv0', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_conv0_weight'], u'op': u'Convolution'}
-977, 	op:BatchNorm           , name:part_3_bn0                     -> part_3_bn0
-978, 	op:Activation          , name:part_3_relu0                   -> part_3_relu0
-979, 	op:Pooling             , name:pooling3                       -> pooling3
-981, 	op:Convolution         , name:part_3_stage1_unit1_conv1      -> part_3_stage1_unit1_conv1
-{u'inputs': [[979, 0, 0], [980, 0, 0]], u'name': u'part_3_stage1_unit1_conv1', 'bottom': ['pooling3'], 'top': u'part_3_stage1_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage1_unit1_conv1_weight'], u'op': u'Convolution'}
-986, 	op:BatchNorm           , name:part_3_stage1_unit1_bn1        -> part_3_stage1_unit1_bn1
-987, 	op:Activation          , name:part_3_stage1_unit1_relu1      -> part_3_stage1_unit1_relu1
-989, 	op:Convolution         , name:part_3_stage1_unit1_conv2      -> part_3_stage1_unit1_conv2
-{u'inputs': [[987, 0, 0], [988, 0, 0]], u'name': u'part_3_stage1_unit1_conv2', 'bottom': ['part_3_stage1_unit1_relu1'], 'top': u'part_3_stage1_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage1_unit1_conv2_weight'], u'op': u'Convolution'}
-994, 	op:BatchNorm           , name:part_3_stage1_unit1_bn2        -> part_3_stage1_unit1_bn2
-995, 	op:Activation          , name:part_3_stage1_unit1_relu2      -> part_3_stage1_unit1_relu2
-997, 	op:Convolution         , name:part_3_stage1_unit1_conv_proj  -> part_3_stage1_unit1_conv_proj
-{u'inputs': [[979, 0, 0], [996, 0, 0]], u'name': u'part_3_stage1_unit1_conv_proj', 'bottom': ['pooling3'], 'top': u'part_3_stage1_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage1_unit1_conv_proj_weight'], u'op': u'Convolution'}
-1002, 	op:BatchNorm           , name:part_3_stage1_unit1_bn_proj    -> part_3_stage1_unit1_bn_proj
-1003, 	op:Activation          , name:part_3_stage1_unit1_relu_proj  -> part_3_stage1_unit1_relu_proj
-1004, 	op:elemwise_add        , name:_plus48                        -> _plus48
-1006, 	op:Convolution         , name:part_3_stage1_unit2_conv1      -> part_3_stage1_unit2_conv1
-{u'inputs': [[1004, 0, 0], [1005, 0, 0]], u'name': u'part_3_stage1_unit2_conv1', 'bottom': ['_plus48'], 'top': u'part_3_stage1_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage1_unit2_conv1_weight'], u'op': u'Convolution'}
-1011, 	op:BatchNorm           , name:part_3_stage1_unit2_bn1        -> part_3_stage1_unit2_bn1
-1012, 	op:Activation          , name:part_3_stage1_unit2_relu1      -> part_3_stage1_unit2_relu1
-1014, 	op:Convolution         , name:part_3_stage1_unit2_conv2      -> part_3_stage1_unit2_conv2
-{u'inputs': [[1012, 0, 0], [1013, 0, 0]], u'name': u'part_3_stage1_unit2_conv2', 'bottom': ['part_3_stage1_unit2_relu1'], 'top': u'part_3_stage1_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage1_unit2_conv2_weight'], u'op': u'Convolution'}
-1019, 	op:BatchNorm           , name:part_3_stage1_unit2_bn2        -> part_3_stage1_unit2_bn2
-1020, 	op:Activation          , name:part_3_stage1_unit2_relu2      -> part_3_stage1_unit2_relu2
-1021, 	op:elemwise_add        , name:_plus49                        -> _plus49
-1023, 	op:Convolution         , name:part_3_stage1_unit3_conv1      -> part_3_stage1_unit3_conv1
-{u'inputs': [[1021, 0, 0], [1022, 0, 0]], u'name': u'part_3_stage1_unit3_conv1', 'bottom': ['_plus49'], 'top': u'part_3_stage1_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage1_unit3_conv1_weight'], u'op': u'Convolution'}
-1028, 	op:BatchNorm           , name:part_3_stage1_unit3_bn1        -> part_3_stage1_unit3_bn1
-1029, 	op:Activation          , name:part_3_stage1_unit3_relu1      -> part_3_stage1_unit3_relu1
-1031, 	op:Convolution         , name:part_3_stage1_unit3_conv2      -> part_3_stage1_unit3_conv2
-{u'inputs': [[1029, 0, 0], [1030, 0, 0]], u'name': u'part_3_stage1_unit3_conv2', 'bottom': ['part_3_stage1_unit3_relu1'], 'top': u'part_3_stage1_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage1_unit3_conv2_weight'], u'op': u'Convolution'}
-1036, 	op:BatchNorm           , name:part_3_stage1_unit3_bn2        -> part_3_stage1_unit3_bn2
-1037, 	op:Activation          , name:part_3_stage1_unit3_relu2      -> part_3_stage1_unit3_relu2
-1038, 	op:elemwise_add        , name:_plus50                        -> _plus50
-1040, 	op:Convolution         , name:part_3_stage2_unit1_conv1      -> part_3_stage2_unit1_conv1
-{u'inputs': [[1038, 0, 0], [1039, 0, 0]], u'name': u'part_3_stage2_unit1_conv1', 'bottom': ['_plus50'], 'top': u'part_3_stage2_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage2_unit1_conv1_weight'], u'op': u'Convolution'}
-1045, 	op:BatchNorm           , name:part_3_stage2_unit1_bn1        -> part_3_stage2_unit1_bn1
-1046, 	op:Activation          , name:part_3_stage2_unit1_relu1      -> part_3_stage2_unit1_relu1
-1048, 	op:Convolution         , name:part_3_stage2_unit1_conv2      -> part_3_stage2_unit1_conv2
-{u'inputs': [[1046, 0, 0], [1047, 0, 0]], u'name': u'part_3_stage2_unit1_conv2', 'bottom': ['part_3_stage2_unit1_relu1'], 'top': u'part_3_stage2_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage2_unit1_conv2_weight'], u'op': u'Convolution'}
-1053, 	op:BatchNorm           , name:part_3_stage2_unit1_bn2        -> part_3_stage2_unit1_bn2
-1054, 	op:Activation          , name:part_3_stage2_unit1_relu2      -> part_3_stage2_unit1_relu2
-1056, 	op:Convolution         , name:part_3_stage2_unit1_conv_proj  -> part_3_stage2_unit1_conv_proj
-{u'inputs': [[1038, 0, 0], [1055, 0, 0]], u'name': u'part_3_stage2_unit1_conv_proj', 'bottom': ['_plus50'], 'top': u'part_3_stage2_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage2_unit1_conv_proj_weight'], u'op': u'Convolution'}
-1061, 	op:BatchNorm           , name:part_3_stage2_unit1_bn_proj    -> part_3_stage2_unit1_bn_proj
-1062, 	op:Activation          , name:part_3_stage2_unit1_relu_proj  -> part_3_stage2_unit1_relu_proj
-1063, 	op:elemwise_add        , name:_plus51                        -> _plus51
-1065, 	op:Convolution         , name:part_3_stage2_unit2_conv1      -> part_3_stage2_unit2_conv1
-{u'inputs': [[1063, 0, 0], [1064, 0, 0]], u'name': u'part_3_stage2_unit2_conv1', 'bottom': ['_plus51'], 'top': u'part_3_stage2_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage2_unit2_conv1_weight'], u'op': u'Convolution'}
-1070, 	op:BatchNorm           , name:part_3_stage2_unit2_bn1        -> part_3_stage2_unit2_bn1
-1071, 	op:Activation          , name:part_3_stage2_unit2_relu1      -> part_3_stage2_unit2_relu1
-1073, 	op:Convolution         , name:part_3_stage2_unit2_conv2      -> part_3_stage2_unit2_conv2
-{u'inputs': [[1071, 0, 0], [1072, 0, 0]], u'name': u'part_3_stage2_unit2_conv2', 'bottom': ['part_3_stage2_unit2_relu1'], 'top': u'part_3_stage2_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage2_unit2_conv2_weight'], u'op': u'Convolution'}
-1078, 	op:BatchNorm           , name:part_3_stage2_unit2_bn2        -> part_3_stage2_unit2_bn2
-1079, 	op:Activation          , name:part_3_stage2_unit2_relu2      -> part_3_stage2_unit2_relu2
-1080, 	op:elemwise_add        , name:_plus52                        -> _plus52
-1082, 	op:Convolution         , name:part_3_stage2_unit3_conv1      -> part_3_stage2_unit3_conv1
-{u'inputs': [[1080, 0, 0], [1081, 0, 0]], u'name': u'part_3_stage2_unit3_conv1', 'bottom': ['_plus52'], 'top': u'part_3_stage2_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage2_unit3_conv1_weight'], u'op': u'Convolution'}
-1087, 	op:BatchNorm           , name:part_3_stage2_unit3_bn1        -> part_3_stage2_unit3_bn1
-1088, 	op:Activation          , name:part_3_stage2_unit3_relu1      -> part_3_stage2_unit3_relu1
-1090, 	op:Convolution         , name:part_3_stage2_unit3_conv2      -> part_3_stage2_unit3_conv2
-{u'inputs': [[1088, 0, 0], [1089, 0, 0]], u'name': u'part_3_stage2_unit3_conv2', 'bottom': ['part_3_stage2_unit3_relu1'], 'top': u'part_3_stage2_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage2_unit3_conv2_weight'], u'op': u'Convolution'}
-1095, 	op:BatchNorm           , name:part_3_stage2_unit3_bn2        -> part_3_stage2_unit3_bn2
-1096, 	op:Activation          , name:part_3_stage2_unit3_relu2      -> part_3_stage2_unit3_relu2
-1097, 	op:elemwise_add        , name:_plus53                        -> _plus53
-1099, 	op:Convolution         , name:part_3_stage2_unit4_conv1      -> part_3_stage2_unit4_conv1
-{u'inputs': [[1097, 0, 0], [1098, 0, 0]], u'name': u'part_3_stage2_unit4_conv1', 'bottom': ['_plus53'], 'top': u'part_3_stage2_unit4_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage2_unit4_conv1_weight'], u'op': u'Convolution'}
-1104, 	op:BatchNorm           , name:part_3_stage2_unit4_bn1        -> part_3_stage2_unit4_bn1
-1105, 	op:Activation          , name:part_3_stage2_unit4_relu1      -> part_3_stage2_unit4_relu1
-1107, 	op:Convolution         , name:part_3_stage2_unit4_conv2      -> part_3_stage2_unit4_conv2
-{u'inputs': [[1105, 0, 0], [1106, 0, 0]], u'name': u'part_3_stage2_unit4_conv2', 'bottom': ['part_3_stage2_unit4_relu1'], 'top': u'part_3_stage2_unit4_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage2_unit4_conv2_weight'], u'op': u'Convolution'}
-1112, 	op:BatchNorm           , name:part_3_stage2_unit4_bn2        -> part_3_stage2_unit4_bn2
-1113, 	op:Activation          , name:part_3_stage2_unit4_relu2      -> part_3_stage2_unit4_relu2
-1114, 	op:elemwise_add        , name:_plus54                        -> _plus54
-1116, 	op:Convolution         , name:part_3_stage3_unit1_conv1      -> part_3_stage3_unit1_conv1
-{u'inputs': [[1114, 0, 0], [1115, 0, 0]], u'name': u'part_3_stage3_unit1_conv1', 'bottom': ['_plus54'], 'top': u'part_3_stage3_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage3_unit1_conv1_weight'], u'op': u'Convolution'}
-1121, 	op:BatchNorm           , name:part_3_stage3_unit1_bn1        -> part_3_stage3_unit1_bn1
-1122, 	op:Activation          , name:part_3_stage3_unit1_relu1      -> part_3_stage3_unit1_relu1
-1124, 	op:Convolution         , name:part_3_stage3_unit1_conv2      -> part_3_stage3_unit1_conv2
-{u'inputs': [[1122, 0, 0], [1123, 0, 0]], u'name': u'part_3_stage3_unit1_conv2', 'bottom': ['part_3_stage3_unit1_relu1'], 'top': u'part_3_stage3_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage3_unit1_conv2_weight'], u'op': u'Convolution'}
-1129, 	op:BatchNorm           , name:part_3_stage3_unit1_bn2        -> part_3_stage3_unit1_bn2
-1130, 	op:Activation          , name:part_3_stage3_unit1_relu2      -> part_3_stage3_unit1_relu2
-1132, 	op:Convolution         , name:part_3_stage3_unit1_conv_proj  -> part_3_stage3_unit1_conv_proj
-{u'inputs': [[1114, 0, 0], [1131, 0, 0]], u'name': u'part_3_stage3_unit1_conv_proj', 'bottom': ['_plus54'], 'top': u'part_3_stage3_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage3_unit1_conv_proj_weight'], u'op': u'Convolution'}
-1137, 	op:BatchNorm           , name:part_3_stage3_unit1_bn_proj    -> part_3_stage3_unit1_bn_proj
-1138, 	op:Activation          , name:part_3_stage3_unit1_relu_proj  -> part_3_stage3_unit1_relu_proj
-1139, 	op:elemwise_add        , name:_plus55                        -> _plus55
-1141, 	op:Convolution         , name:part_3_stage3_unit2_conv1      -> part_3_stage3_unit2_conv1
-{u'inputs': [[1139, 0, 0], [1140, 0, 0]], u'name': u'part_3_stage3_unit2_conv1', 'bottom': ['_plus55'], 'top': u'part_3_stage3_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage3_unit2_conv1_weight'], u'op': u'Convolution'}
-1146, 	op:BatchNorm           , name:part_3_stage3_unit2_bn1        -> part_3_stage3_unit2_bn1
-1147, 	op:Activation          , name:part_3_stage3_unit2_relu1      -> part_3_stage3_unit2_relu1
-1149, 	op:Convolution         , name:part_3_stage3_unit2_conv2      -> part_3_stage3_unit2_conv2
-{u'inputs': [[1147, 0, 0], [1148, 0, 0]], u'name': u'part_3_stage3_unit2_conv2', 'bottom': ['part_3_stage3_unit2_relu1'], 'top': u'part_3_stage3_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage3_unit2_conv2_weight'], u'op': u'Convolution'}
-1154, 	op:BatchNorm           , name:part_3_stage3_unit2_bn2        -> part_3_stage3_unit2_bn2
-1155, 	op:Activation          , name:part_3_stage3_unit2_relu2      -> part_3_stage3_unit2_relu2
-1156, 	op:elemwise_add        , name:_plus56                        -> _plus56
-1158, 	op:Convolution         , name:part_3_stage3_unit3_conv1      -> part_3_stage3_unit3_conv1
-{u'inputs': [[1156, 0, 0], [1157, 0, 0]], u'name': u'part_3_stage3_unit3_conv1', 'bottom': ['_plus56'], 'top': u'part_3_stage3_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage3_unit3_conv1_weight'], u'op': u'Convolution'}
-1163, 	op:BatchNorm           , name:part_3_stage3_unit3_bn1        -> part_3_stage3_unit3_bn1
-1164, 	op:Activation          , name:part_3_stage3_unit3_relu1      -> part_3_stage3_unit3_relu1
-1166, 	op:Convolution         , name:part_3_stage3_unit3_conv2      -> part_3_stage3_unit3_conv2
-{u'inputs': [[1164, 0, 0], [1165, 0, 0]], u'name': u'part_3_stage3_unit3_conv2', 'bottom': ['part_3_stage3_unit3_relu1'], 'top': u'part_3_stage3_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage3_unit3_conv2_weight'], u'op': u'Convolution'}
-1171, 	op:BatchNorm           , name:part_3_stage3_unit3_bn2        -> part_3_stage3_unit3_bn2
-1172, 	op:Activation          , name:part_3_stage3_unit3_relu2      -> part_3_stage3_unit3_relu2
-1173, 	op:elemwise_add        , name:_plus57                        -> _plus57
-1175, 	op:Convolution         , name:part_3_stage3_unit4_conv1      -> part_3_stage3_unit4_conv1
-{u'inputs': [[1173, 0, 0], [1174, 0, 0]], u'name': u'part_3_stage3_unit4_conv1', 'bottom': ['_plus57'], 'top': u'part_3_stage3_unit4_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage3_unit4_conv1_weight'], u'op': u'Convolution'}
-1180, 	op:BatchNorm           , name:part_3_stage3_unit4_bn1        -> part_3_stage3_unit4_bn1
-1181, 	op:Activation          , name:part_3_stage3_unit4_relu1      -> part_3_stage3_unit4_relu1
-1183, 	op:Convolution         , name:part_3_stage3_unit4_conv2      -> part_3_stage3_unit4_conv2
-{u'inputs': [[1181, 0, 0], [1182, 0, 0]], u'name': u'part_3_stage3_unit4_conv2', 'bottom': ['part_3_stage3_unit4_relu1'], 'top': u'part_3_stage3_unit4_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage3_unit4_conv2_weight'], u'op': u'Convolution'}
-1188, 	op:BatchNorm           , name:part_3_stage3_unit4_bn2        -> part_3_stage3_unit4_bn2
-1189, 	op:Activation          , name:part_3_stage3_unit4_relu2      -> part_3_stage3_unit4_relu2
-1190, 	op:elemwise_add        , name:_plus58                        -> _plus58
-1192, 	op:Convolution         , name:part_3_stage3_unit5_conv1      -> part_3_stage3_unit5_conv1
-{u'inputs': [[1190, 0, 0], [1191, 0, 0]], u'name': u'part_3_stage3_unit5_conv1', 'bottom': ['_plus58'], 'top': u'part_3_stage3_unit5_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage3_unit5_conv1_weight'], u'op': u'Convolution'}
-1197, 	op:BatchNorm           , name:part_3_stage3_unit5_bn1        -> part_3_stage3_unit5_bn1
-1198, 	op:Activation          , name:part_3_stage3_unit5_relu1      -> part_3_stage3_unit5_relu1
-1200, 	op:Convolution         , name:part_3_stage3_unit5_conv2      -> part_3_stage3_unit5_conv2
-{u'inputs': [[1198, 0, 0], [1199, 0, 0]], u'name': u'part_3_stage3_unit5_conv2', 'bottom': ['part_3_stage3_unit5_relu1'], 'top': u'part_3_stage3_unit5_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage3_unit5_conv2_weight'], u'op': u'Convolution'}
-1205, 	op:BatchNorm           , name:part_3_stage3_unit5_bn2        -> part_3_stage3_unit5_bn2
-1206, 	op:Activation          , name:part_3_stage3_unit5_relu2      -> part_3_stage3_unit5_relu2
-1207, 	op:elemwise_add        , name:_plus59                        -> _plus59
-1209, 	op:Convolution         , name:part_3_stage3_unit6_conv1      -> part_3_stage3_unit6_conv1
-{u'inputs': [[1207, 0, 0], [1208, 0, 0]], u'name': u'part_3_stage3_unit6_conv1', 'bottom': ['_plus59'], 'top': u'part_3_stage3_unit6_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage3_unit6_conv1_weight'], u'op': u'Convolution'}
-1214, 	op:BatchNorm           , name:part_3_stage3_unit6_bn1        -> part_3_stage3_unit6_bn1
-1215, 	op:Activation          , name:part_3_stage3_unit6_relu1      -> part_3_stage3_unit6_relu1
-1217, 	op:Convolution         , name:part_3_stage3_unit6_conv2      -> part_3_stage3_unit6_conv2
-{u'inputs': [[1215, 0, 0], [1216, 0, 0]], u'name': u'part_3_stage3_unit6_conv2', 'bottom': ['part_3_stage3_unit6_relu1'], 'top': u'part_3_stage3_unit6_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage3_unit6_conv2_weight'], u'op': u'Convolution'}
-1222, 	op:BatchNorm           , name:part_3_stage3_unit6_bn2        -> part_3_stage3_unit6_bn2
-1223, 	op:Activation          , name:part_3_stage3_unit6_relu2      -> part_3_stage3_unit6_relu2
-1224, 	op:elemwise_add        , name:_plus60                        -> _plus60
-1226, 	op:Convolution         , name:part_3_stage4_unit1_conv1      -> part_3_stage4_unit1_conv1
-{u'inputs': [[1224, 0, 0], [1225, 0, 0]], u'name': u'part_3_stage4_unit1_conv1', 'bottom': ['_plus60'], 'top': u'part_3_stage4_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage4_unit1_conv1_weight'], u'op': u'Convolution'}
-1231, 	op:BatchNorm           , name:part_3_stage4_unit1_bn1        -> part_3_stage4_unit1_bn1
-1232, 	op:Activation          , name:part_3_stage4_unit1_relu1      -> part_3_stage4_unit1_relu1
-1234, 	op:Convolution         , name:part_3_stage4_unit1_conv2      -> part_3_stage4_unit1_conv2
-{u'inputs': [[1232, 0, 0], [1233, 0, 0]], u'name': u'part_3_stage4_unit1_conv2', 'bottom': ['part_3_stage4_unit1_relu1'], 'top': u'part_3_stage4_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage4_unit1_conv2_weight'], u'op': u'Convolution'}
-1239, 	op:BatchNorm           , name:part_3_stage4_unit1_bn2        -> part_3_stage4_unit1_bn2
-1240, 	op:Activation          , name:part_3_stage4_unit1_relu2      -> part_3_stage4_unit1_relu2
-1242, 	op:Convolution         , name:part_3_stage4_unit1_conv_proj  -> part_3_stage4_unit1_conv_proj
-{u'inputs': [[1224, 0, 0], [1241, 0, 0]], u'name': u'part_3_stage4_unit1_conv_proj', 'bottom': ['_plus60'], 'top': u'part_3_stage4_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage4_unit1_conv_proj_weight'], u'op': u'Convolution'}
-1247, 	op:BatchNorm           , name:part_3_stage4_unit1_bn_proj    -> part_3_stage4_unit1_bn_proj
-1248, 	op:Activation          , name:part_3_stage4_unit1_relu_proj  -> part_3_stage4_unit1_relu_proj
-1249, 	op:elemwise_add        , name:_plus61                        -> _plus61
-1251, 	op:Convolution         , name:part_3_stage4_unit2_conv1      -> part_3_stage4_unit2_conv1
-{u'inputs': [[1249, 0, 0], [1250, 0, 0]], u'name': u'part_3_stage4_unit2_conv1', 'bottom': ['_plus61'], 'top': u'part_3_stage4_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage4_unit2_conv1_weight'], u'op': u'Convolution'}
-1256, 	op:BatchNorm           , name:part_3_stage4_unit2_bn1        -> part_3_stage4_unit2_bn1
-1257, 	op:Activation          , name:part_3_stage4_unit2_relu1      -> part_3_stage4_unit2_relu1
-1259, 	op:Convolution         , name:part_3_stage4_unit2_conv2      -> part_3_stage4_unit2_conv2
-{u'inputs': [[1257, 0, 0], [1258, 0, 0]], u'name': u'part_3_stage4_unit2_conv2', 'bottom': ['part_3_stage4_unit2_relu1'], 'top': u'part_3_stage4_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage4_unit2_conv2_weight'], u'op': u'Convolution'}
-1264, 	op:BatchNorm           , name:part_3_stage4_unit2_bn2        -> part_3_stage4_unit2_bn2
-1265, 	op:Activation          , name:part_3_stage4_unit2_relu2      -> part_3_stage4_unit2_relu2
-1266, 	op:elemwise_add        , name:_plus62                        -> _plus62
-1268, 	op:Convolution         , name:part_3_stage4_unit3_conv1      -> part_3_stage4_unit3_conv1
-{u'inputs': [[1266, 0, 0], [1267, 0, 0]], u'name': u'part_3_stage4_unit3_conv1', 'bottom': ['_plus62'], 'top': u'part_3_stage4_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage4_unit3_conv1_weight'], u'op': u'Convolution'}
-1273, 	op:BatchNorm           , name:part_3_stage4_unit3_bn1        -> part_3_stage4_unit3_bn1
-1274, 	op:Activation          , name:part_3_stage4_unit3_relu1      -> part_3_stage4_unit3_relu1
-1276, 	op:Convolution         , name:part_3_stage4_unit3_conv2      -> part_3_stage4_unit3_conv2
-{u'inputs': [[1274, 0, 0], [1275, 0, 0]], u'name': u'part_3_stage4_unit3_conv2', 'bottom': ['part_3_stage4_unit3_relu1'], 'top': u'part_3_stage4_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_3_stage4_unit3_conv2_weight'], u'op': u'Convolution'}
-1281, 	op:BatchNorm           , name:part_3_stage4_unit3_bn2        -> part_3_stage4_unit3_bn2
-1282, 	op:Activation          , name:part_3_stage4_unit3_relu2      -> part_3_stage4_unit3_relu2
-1283, 	op:elemwise_add        , name:_plus63                        -> _plus63
-1284, 	op:Pooling             , name:part_3_pool1                   -> part_3_pool1
-1285, 	op:Flatten             , name:part_3_flat_pool               -> part_3_flat_pool
-1290, 	op:BatchNorm           , name:part_3_bn_pool                 -> part_3_bn_pool
-1293, 	op:FullyConnected      , name:part_3_flat                    -> part_3_flat
-1295, 	op:Convolution         , name:part_6_conv0                   -> part_6_conv0
-{u'inputs': [[1, 4, 0], [1294, 0, 0]], u'name': u'part_6_conv0', 'bottom': ['data_slice'], 'top': u'part_6_conv0', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_conv0_weight'], u'op': u'Convolution'}
-1300, 	op:BatchNorm           , name:part_6_bn0                     -> part_6_bn0
-1301, 	op:Activation          , name:part_6_relu0                   -> part_6_relu0
-1302, 	op:Pooling             , name:pooling4                       -> pooling4
-1304, 	op:Convolution         , name:part_6_stage1_unit1_conv1      -> part_6_stage1_unit1_conv1
-{u'inputs': [[1302, 0, 0], [1303, 0, 0]], u'name': u'part_6_stage1_unit1_conv1', 'bottom': ['pooling4'], 'top': u'part_6_stage1_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage1_unit1_conv1_weight'], u'op': u'Convolution'}
-1309, 	op:BatchNorm           , name:part_6_stage1_unit1_bn1        -> part_6_stage1_unit1_bn1
-1310, 	op:Activation          , name:part_6_stage1_unit1_relu1      -> part_6_stage1_unit1_relu1
-1312, 	op:Convolution         , name:part_6_stage1_unit1_conv2      -> part_6_stage1_unit1_conv2
-{u'inputs': [[1310, 0, 0], [1311, 0, 0]], u'name': u'part_6_stage1_unit1_conv2', 'bottom': ['part_6_stage1_unit1_relu1'], 'top': u'part_6_stage1_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage1_unit1_conv2_weight'], u'op': u'Convolution'}
-1317, 	op:BatchNorm           , name:part_6_stage1_unit1_bn2        -> part_6_stage1_unit1_bn2
-1318, 	op:Activation          , name:part_6_stage1_unit1_relu2      -> part_6_stage1_unit1_relu2
-1320, 	op:Convolution         , name:part_6_stage1_unit1_conv_proj  -> part_6_stage1_unit1_conv_proj
-{u'inputs': [[1302, 0, 0], [1319, 0, 0]], u'name': u'part_6_stage1_unit1_conv_proj', 'bottom': ['pooling4'], 'top': u'part_6_stage1_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage1_unit1_conv_proj_weight'], u'op': u'Convolution'}
-1325, 	op:BatchNorm           , name:part_6_stage1_unit1_bn_proj    -> part_6_stage1_unit1_bn_proj
-1326, 	op:Activation          , name:part_6_stage1_unit1_relu_proj  -> part_6_stage1_unit1_relu_proj
-1327, 	op:elemwise_add        , name:_plus64                        -> _plus64
-1329, 	op:Convolution         , name:part_6_stage1_unit2_conv1      -> part_6_stage1_unit2_conv1
-{u'inputs': [[1327, 0, 0], [1328, 0, 0]], u'name': u'part_6_stage1_unit2_conv1', 'bottom': ['_plus64'], 'top': u'part_6_stage1_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage1_unit2_conv1_weight'], u'op': u'Convolution'}
-1334, 	op:BatchNorm           , name:part_6_stage1_unit2_bn1        -> part_6_stage1_unit2_bn1
-1335, 	op:Activation          , name:part_6_stage1_unit2_relu1      -> part_6_stage1_unit2_relu1
-1337, 	op:Convolution         , name:part_6_stage1_unit2_conv2      -> part_6_stage1_unit2_conv2
-{u'inputs': [[1335, 0, 0], [1336, 0, 0]], u'name': u'part_6_stage1_unit2_conv2', 'bottom': ['part_6_stage1_unit2_relu1'], 'top': u'part_6_stage1_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage1_unit2_conv2_weight'], u'op': u'Convolution'}
-1342, 	op:BatchNorm           , name:part_6_stage1_unit2_bn2        -> part_6_stage1_unit2_bn2
-1343, 	op:Activation          , name:part_6_stage1_unit2_relu2      -> part_6_stage1_unit2_relu2
-1344, 	op:elemwise_add        , name:_plus65                        -> _plus65
-1346, 	op:Convolution         , name:part_6_stage1_unit3_conv1      -> part_6_stage1_unit3_conv1
-{u'inputs': [[1344, 0, 0], [1345, 0, 0]], u'name': u'part_6_stage1_unit3_conv1', 'bottom': ['_plus65'], 'top': u'part_6_stage1_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage1_unit3_conv1_weight'], u'op': u'Convolution'}
-1351, 	op:BatchNorm           , name:part_6_stage1_unit3_bn1        -> part_6_stage1_unit3_bn1
-1352, 	op:Activation          , name:part_6_stage1_unit3_relu1      -> part_6_stage1_unit3_relu1
-1354, 	op:Convolution         , name:part_6_stage1_unit3_conv2      -> part_6_stage1_unit3_conv2
-{u'inputs': [[1352, 0, 0], [1353, 0, 0]], u'name': u'part_6_stage1_unit3_conv2', 'bottom': ['part_6_stage1_unit3_relu1'], 'top': u'part_6_stage1_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage1_unit3_conv2_weight'], u'op': u'Convolution'}
-1359, 	op:BatchNorm           , name:part_6_stage1_unit3_bn2        -> part_6_stage1_unit3_bn2
-1360, 	op:Activation          , name:part_6_stage1_unit3_relu2      -> part_6_stage1_unit3_relu2
-1361, 	op:elemwise_add        , name:_plus66                        -> _plus66
-1363, 	op:Convolution         , name:part_6_stage2_unit1_conv1      -> part_6_stage2_unit1_conv1
-{u'inputs': [[1361, 0, 0], [1362, 0, 0]], u'name': u'part_6_stage2_unit1_conv1', 'bottom': ['_plus66'], 'top': u'part_6_stage2_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage2_unit1_conv1_weight'], u'op': u'Convolution'}
-1368, 	op:BatchNorm           , name:part_6_stage2_unit1_bn1        -> part_6_stage2_unit1_bn1
-1369, 	op:Activation          , name:part_6_stage2_unit1_relu1      -> part_6_stage2_unit1_relu1
-1371, 	op:Convolution         , name:part_6_stage2_unit1_conv2      -> part_6_stage2_unit1_conv2
-{u'inputs': [[1369, 0, 0], [1370, 0, 0]], u'name': u'part_6_stage2_unit1_conv2', 'bottom': ['part_6_stage2_unit1_relu1'], 'top': u'part_6_stage2_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage2_unit1_conv2_weight'], u'op': u'Convolution'}
-1376, 	op:BatchNorm           , name:part_6_stage2_unit1_bn2        -> part_6_stage2_unit1_bn2
-1377, 	op:Activation          , name:part_6_stage2_unit1_relu2      -> part_6_stage2_unit1_relu2
-1379, 	op:Convolution         , name:part_6_stage2_unit1_conv_proj  -> part_6_stage2_unit1_conv_proj
-{u'inputs': [[1361, 0, 0], [1378, 0, 0]], u'name': u'part_6_stage2_unit1_conv_proj', 'bottom': ['_plus66'], 'top': u'part_6_stage2_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage2_unit1_conv_proj_weight'], u'op': u'Convolution'}
-1384, 	op:BatchNorm           , name:part_6_stage2_unit1_bn_proj    -> part_6_stage2_unit1_bn_proj
-1385, 	op:Activation          , name:part_6_stage2_unit1_relu_proj  -> part_6_stage2_unit1_relu_proj
-1386, 	op:elemwise_add        , name:_plus67                        -> _plus67
-1388, 	op:Convolution         , name:part_6_stage2_unit2_conv1      -> part_6_stage2_unit2_conv1
-{u'inputs': [[1386, 0, 0], [1387, 0, 0]], u'name': u'part_6_stage2_unit2_conv1', 'bottom': ['_plus67'], 'top': u'part_6_stage2_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage2_unit2_conv1_weight'], u'op': u'Convolution'}
-1393, 	op:BatchNorm           , name:part_6_stage2_unit2_bn1        -> part_6_stage2_unit2_bn1
-1394, 	op:Activation          , name:part_6_stage2_unit2_relu1      -> part_6_stage2_unit2_relu1
-1396, 	op:Convolution         , name:part_6_stage2_unit2_conv2      -> part_6_stage2_unit2_conv2
-{u'inputs': [[1394, 0, 0], [1395, 0, 0]], u'name': u'part_6_stage2_unit2_conv2', 'bottom': ['part_6_stage2_unit2_relu1'], 'top': u'part_6_stage2_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage2_unit2_conv2_weight'], u'op': u'Convolution'}
-1401, 	op:BatchNorm           , name:part_6_stage2_unit2_bn2        -> part_6_stage2_unit2_bn2
-1402, 	op:Activation          , name:part_6_stage2_unit2_relu2      -> part_6_stage2_unit2_relu2
-1403, 	op:elemwise_add        , name:_plus68                        -> _plus68
-1405, 	op:Convolution         , name:part_6_stage2_unit3_conv1      -> part_6_stage2_unit3_conv1
-{u'inputs': [[1403, 0, 0], [1404, 0, 0]], u'name': u'part_6_stage2_unit3_conv1', 'bottom': ['_plus68'], 'top': u'part_6_stage2_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage2_unit3_conv1_weight'], u'op': u'Convolution'}
-1410, 	op:BatchNorm           , name:part_6_stage2_unit3_bn1        -> part_6_stage2_unit3_bn1
-1411, 	op:Activation          , name:part_6_stage2_unit3_relu1      -> part_6_stage2_unit3_relu1
-1413, 	op:Convolution         , name:part_6_stage2_unit3_conv2      -> part_6_stage2_unit3_conv2
-{u'inputs': [[1411, 0, 0], [1412, 0, 0]], u'name': u'part_6_stage2_unit3_conv2', 'bottom': ['part_6_stage2_unit3_relu1'], 'top': u'part_6_stage2_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage2_unit3_conv2_weight'], u'op': u'Convolution'}
-1418, 	op:BatchNorm           , name:part_6_stage2_unit3_bn2        -> part_6_stage2_unit3_bn2
-1419, 	op:Activation          , name:part_6_stage2_unit3_relu2      -> part_6_stage2_unit3_relu2
-1420, 	op:elemwise_add        , name:_plus69                        -> _plus69
-1422, 	op:Convolution         , name:part_6_stage2_unit4_conv1      -> part_6_stage2_unit4_conv1
-{u'inputs': [[1420, 0, 0], [1421, 0, 0]], u'name': u'part_6_stage2_unit4_conv1', 'bottom': ['_plus69'], 'top': u'part_6_stage2_unit4_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage2_unit4_conv1_weight'], u'op': u'Convolution'}
-1427, 	op:BatchNorm           , name:part_6_stage2_unit4_bn1        -> part_6_stage2_unit4_bn1
-1428, 	op:Activation          , name:part_6_stage2_unit4_relu1      -> part_6_stage2_unit4_relu1
-1430, 	op:Convolution         , name:part_6_stage2_unit4_conv2      -> part_6_stage2_unit4_conv2
-{u'inputs': [[1428, 0, 0], [1429, 0, 0]], u'name': u'part_6_stage2_unit4_conv2', 'bottom': ['part_6_stage2_unit4_relu1'], 'top': u'part_6_stage2_unit4_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage2_unit4_conv2_weight'], u'op': u'Convolution'}
-1435, 	op:BatchNorm           , name:part_6_stage2_unit4_bn2        -> part_6_stage2_unit4_bn2
-1436, 	op:Activation          , name:part_6_stage2_unit4_relu2      -> part_6_stage2_unit4_relu2
-1437, 	op:elemwise_add        , name:_plus70                        -> _plus70
-1439, 	op:Convolution         , name:part_6_stage3_unit1_conv1      -> part_6_stage3_unit1_conv1
-{u'inputs': [[1437, 0, 0], [1438, 0, 0]], u'name': u'part_6_stage3_unit1_conv1', 'bottom': ['_plus70'], 'top': u'part_6_stage3_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage3_unit1_conv1_weight'], u'op': u'Convolution'}
-1444, 	op:BatchNorm           , name:part_6_stage3_unit1_bn1        -> part_6_stage3_unit1_bn1
-1445, 	op:Activation          , name:part_6_stage3_unit1_relu1      -> part_6_stage3_unit1_relu1
-1447, 	op:Convolution         , name:part_6_stage3_unit1_conv2      -> part_6_stage3_unit1_conv2
-{u'inputs': [[1445, 0, 0], [1446, 0, 0]], u'name': u'part_6_stage3_unit1_conv2', 'bottom': ['part_6_stage3_unit1_relu1'], 'top': u'part_6_stage3_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage3_unit1_conv2_weight'], u'op': u'Convolution'}
-1452, 	op:BatchNorm           , name:part_6_stage3_unit1_bn2        -> part_6_stage3_unit1_bn2
-1453, 	op:Activation          , name:part_6_stage3_unit1_relu2      -> part_6_stage3_unit1_relu2
-1455, 	op:Convolution         , name:part_6_stage3_unit1_conv_proj  -> part_6_stage3_unit1_conv_proj
-{u'inputs': [[1437, 0, 0], [1454, 0, 0]], u'name': u'part_6_stage3_unit1_conv_proj', 'bottom': ['_plus70'], 'top': u'part_6_stage3_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage3_unit1_conv_proj_weight'], u'op': u'Convolution'}
-1460, 	op:BatchNorm           , name:part_6_stage3_unit1_bn_proj    -> part_6_stage3_unit1_bn_proj
-1461, 	op:Activation          , name:part_6_stage3_unit1_relu_proj  -> part_6_stage3_unit1_relu_proj
-1462, 	op:elemwise_add        , name:_plus71                        -> _plus71
-1464, 	op:Convolution         , name:part_6_stage3_unit2_conv1      -> part_6_stage3_unit2_conv1
-{u'inputs': [[1462, 0, 0], [1463, 0, 0]], u'name': u'part_6_stage3_unit2_conv1', 'bottom': ['_plus71'], 'top': u'part_6_stage3_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage3_unit2_conv1_weight'], u'op': u'Convolution'}
-1469, 	op:BatchNorm           , name:part_6_stage3_unit2_bn1        -> part_6_stage3_unit2_bn1
-1470, 	op:Activation          , name:part_6_stage3_unit2_relu1      -> part_6_stage3_unit2_relu1
-1472, 	op:Convolution         , name:part_6_stage3_unit2_conv2      -> part_6_stage3_unit2_conv2
-{u'inputs': [[1470, 0, 0], [1471, 0, 0]], u'name': u'part_6_stage3_unit2_conv2', 'bottom': ['part_6_stage3_unit2_relu1'], 'top': u'part_6_stage3_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage3_unit2_conv2_weight'], u'op': u'Convolution'}
-1477, 	op:BatchNorm           , name:part_6_stage3_unit2_bn2        -> part_6_stage3_unit2_bn2
-1478, 	op:Activation          , name:part_6_stage3_unit2_relu2      -> part_6_stage3_unit2_relu2
-1479, 	op:elemwise_add        , name:_plus72                        -> _plus72
-1481, 	op:Convolution         , name:part_6_stage3_unit3_conv1      -> part_6_stage3_unit3_conv1
-{u'inputs': [[1479, 0, 0], [1480, 0, 0]], u'name': u'part_6_stage3_unit3_conv1', 'bottom': ['_plus72'], 'top': u'part_6_stage3_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage3_unit3_conv1_weight'], u'op': u'Convolution'}
-1486, 	op:BatchNorm           , name:part_6_stage3_unit3_bn1        -> part_6_stage3_unit3_bn1
-1487, 	op:Activation          , name:part_6_stage3_unit3_relu1      -> part_6_stage3_unit3_relu1
-1489, 	op:Convolution         , name:part_6_stage3_unit3_conv2      -> part_6_stage3_unit3_conv2
-{u'inputs': [[1487, 0, 0], [1488, 0, 0]], u'name': u'part_6_stage3_unit3_conv2', 'bottom': ['part_6_stage3_unit3_relu1'], 'top': u'part_6_stage3_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage3_unit3_conv2_weight'], u'op': u'Convolution'}
-1494, 	op:BatchNorm           , name:part_6_stage3_unit3_bn2        -> part_6_stage3_unit3_bn2
-1495, 	op:Activation          , name:part_6_stage3_unit3_relu2      -> part_6_stage3_unit3_relu2
-1496, 	op:elemwise_add        , name:_plus73                        -> _plus73
-1498, 	op:Convolution         , name:part_6_stage3_unit4_conv1      -> part_6_stage3_unit4_conv1
-{u'inputs': [[1496, 0, 0], [1497, 0, 0]], u'name': u'part_6_stage3_unit4_conv1', 'bottom': ['_plus73'], 'top': u'part_6_stage3_unit4_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage3_unit4_conv1_weight'], u'op': u'Convolution'}
-1503, 	op:BatchNorm           , name:part_6_stage3_unit4_bn1        -> part_6_stage3_unit4_bn1
-1504, 	op:Activation          , name:part_6_stage3_unit4_relu1      -> part_6_stage3_unit4_relu1
-1506, 	op:Convolution         , name:part_6_stage3_unit4_conv2      -> part_6_stage3_unit4_conv2
-{u'inputs': [[1504, 0, 0], [1505, 0, 0]], u'name': u'part_6_stage3_unit4_conv2', 'bottom': ['part_6_stage3_unit4_relu1'], 'top': u'part_6_stage3_unit4_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage3_unit4_conv2_weight'], u'op': u'Convolution'}
-1511, 	op:BatchNorm           , name:part_6_stage3_unit4_bn2        -> part_6_stage3_unit4_bn2
-1512, 	op:Activation          , name:part_6_stage3_unit4_relu2      -> part_6_stage3_unit4_relu2
-1513, 	op:elemwise_add        , name:_plus74                        -> _plus74
-1515, 	op:Convolution         , name:part_6_stage3_unit5_conv1      -> part_6_stage3_unit5_conv1
-{u'inputs': [[1513, 0, 0], [1514, 0, 0]], u'name': u'part_6_stage3_unit5_conv1', 'bottom': ['_plus74'], 'top': u'part_6_stage3_unit5_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage3_unit5_conv1_weight'], u'op': u'Convolution'}
-1520, 	op:BatchNorm           , name:part_6_stage3_unit5_bn1        -> part_6_stage3_unit5_bn1
-1521, 	op:Activation          , name:part_6_stage3_unit5_relu1      -> part_6_stage3_unit5_relu1
-1523, 	op:Convolution         , name:part_6_stage3_unit5_conv2      -> part_6_stage3_unit5_conv2
-{u'inputs': [[1521, 0, 0], [1522, 0, 0]], u'name': u'part_6_stage3_unit5_conv2', 'bottom': ['part_6_stage3_unit5_relu1'], 'top': u'part_6_stage3_unit5_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage3_unit5_conv2_weight'], u'op': u'Convolution'}
-1528, 	op:BatchNorm           , name:part_6_stage3_unit5_bn2        -> part_6_stage3_unit5_bn2
-1529, 	op:Activation          , name:part_6_stage3_unit5_relu2      -> part_6_stage3_unit5_relu2
-1530, 	op:elemwise_add        , name:_plus75                        -> _plus75
-1532, 	op:Convolution         , name:part_6_stage3_unit6_conv1      -> part_6_stage3_unit6_conv1
-{u'inputs': [[1530, 0, 0], [1531, 0, 0]], u'name': u'part_6_stage3_unit6_conv1', 'bottom': ['_plus75'], 'top': u'part_6_stage3_unit6_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage3_unit6_conv1_weight'], u'op': u'Convolution'}
-1537, 	op:BatchNorm           , name:part_6_stage3_unit6_bn1        -> part_6_stage3_unit6_bn1
-1538, 	op:Activation          , name:part_6_stage3_unit6_relu1      -> part_6_stage3_unit6_relu1
-1540, 	op:Convolution         , name:part_6_stage3_unit6_conv2      -> part_6_stage3_unit6_conv2
-{u'inputs': [[1538, 0, 0], [1539, 0, 0]], u'name': u'part_6_stage3_unit6_conv2', 'bottom': ['part_6_stage3_unit6_relu1'], 'top': u'part_6_stage3_unit6_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage3_unit6_conv2_weight'], u'op': u'Convolution'}
-1545, 	op:BatchNorm           , name:part_6_stage3_unit6_bn2        -> part_6_stage3_unit6_bn2
-1546, 	op:Activation          , name:part_6_stage3_unit6_relu2      -> part_6_stage3_unit6_relu2
-1547, 	op:elemwise_add        , name:_plus76                        -> _plus76
-1549, 	op:Convolution         , name:part_6_stage4_unit1_conv1      -> part_6_stage4_unit1_conv1
-{u'inputs': [[1547, 0, 0], [1548, 0, 0]], u'name': u'part_6_stage4_unit1_conv1', 'bottom': ['_plus76'], 'top': u'part_6_stage4_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage4_unit1_conv1_weight'], u'op': u'Convolution'}
-1554, 	op:BatchNorm           , name:part_6_stage4_unit1_bn1        -> part_6_stage4_unit1_bn1
-1555, 	op:Activation          , name:part_6_stage4_unit1_relu1      -> part_6_stage4_unit1_relu1
-1557, 	op:Convolution         , name:part_6_stage4_unit1_conv2      -> part_6_stage4_unit1_conv2
-{u'inputs': [[1555, 0, 0], [1556, 0, 0]], u'name': u'part_6_stage4_unit1_conv2', 'bottom': ['part_6_stage4_unit1_relu1'], 'top': u'part_6_stage4_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage4_unit1_conv2_weight'], u'op': u'Convolution'}
-1562, 	op:BatchNorm           , name:part_6_stage4_unit1_bn2        -> part_6_stage4_unit1_bn2
-1563, 	op:Activation          , name:part_6_stage4_unit1_relu2      -> part_6_stage4_unit1_relu2
-1565, 	op:Convolution         , name:part_6_stage4_unit1_conv_proj  -> part_6_stage4_unit1_conv_proj
-{u'inputs': [[1547, 0, 0], [1564, 0, 0]], u'name': u'part_6_stage4_unit1_conv_proj', 'bottom': ['_plus76'], 'top': u'part_6_stage4_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage4_unit1_conv_proj_weight'], u'op': u'Convolution'}
-1570, 	op:BatchNorm           , name:part_6_stage4_unit1_bn_proj    -> part_6_stage4_unit1_bn_proj
-1571, 	op:Activation          , name:part_6_stage4_unit1_relu_proj  -> part_6_stage4_unit1_relu_proj
-1572, 	op:elemwise_add        , name:_plus77                        -> _plus77
-1574, 	op:Convolution         , name:part_6_stage4_unit2_conv1      -> part_6_stage4_unit2_conv1
-{u'inputs': [[1572, 0, 0], [1573, 0, 0]], u'name': u'part_6_stage4_unit2_conv1', 'bottom': ['_plus77'], 'top': u'part_6_stage4_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage4_unit2_conv1_weight'], u'op': u'Convolution'}
-1579, 	op:BatchNorm           , name:part_6_stage4_unit2_bn1        -> part_6_stage4_unit2_bn1
-1580, 	op:Activation          , name:part_6_stage4_unit2_relu1      -> part_6_stage4_unit2_relu1
-1582, 	op:Convolution         , name:part_6_stage4_unit2_conv2      -> part_6_stage4_unit2_conv2
-{u'inputs': [[1580, 0, 0], [1581, 0, 0]], u'name': u'part_6_stage4_unit2_conv2', 'bottom': ['part_6_stage4_unit2_relu1'], 'top': u'part_6_stage4_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage4_unit2_conv2_weight'], u'op': u'Convolution'}
-1587, 	op:BatchNorm           , name:part_6_stage4_unit2_bn2        -> part_6_stage4_unit2_bn2
-1588, 	op:Activation          , name:part_6_stage4_unit2_relu2      -> part_6_stage4_unit2_relu2
-1589, 	op:elemwise_add        , name:_plus78                        -> _plus78
-1591, 	op:Convolution         , name:part_6_stage4_unit3_conv1      -> part_6_stage4_unit3_conv1
-{u'inputs': [[1589, 0, 0], [1590, 0, 0]], u'name': u'part_6_stage4_unit3_conv1', 'bottom': ['_plus78'], 'top': u'part_6_stage4_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage4_unit3_conv1_weight'], u'op': u'Convolution'}
-1596, 	op:BatchNorm           , name:part_6_stage4_unit3_bn1        -> part_6_stage4_unit3_bn1
-1597, 	op:Activation          , name:part_6_stage4_unit3_relu1      -> part_6_stage4_unit3_relu1
-1599, 	op:Convolution         , name:part_6_stage4_unit3_conv2      -> part_6_stage4_unit3_conv2
-{u'inputs': [[1597, 0, 0], [1598, 0, 0]], u'name': u'part_6_stage4_unit3_conv2', 'bottom': ['part_6_stage4_unit3_relu1'], 'top': u'part_6_stage4_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_6_stage4_unit3_conv2_weight'], u'op': u'Convolution'}
-1604, 	op:BatchNorm           , name:part_6_stage4_unit3_bn2        -> part_6_stage4_unit3_bn2
-1605, 	op:Activation          , name:part_6_stage4_unit3_relu2      -> part_6_stage4_unit3_relu2
-1606, 	op:elemwise_add        , name:_plus79                        -> _plus79
-1607, 	op:Pooling             , name:part_6_pool1                   -> part_6_pool1
-1608, 	op:Flatten             , name:part_6_flat_pool               -> part_6_flat_pool
-1613, 	op:BatchNorm           , name:part_6_bn_pool                 -> part_6_bn_pool
-1616, 	op:FullyConnected      , name:part_6_flat                    -> part_6_flat
-1618, 	op:Convolution         , name:part_7_conv0                   -> part_7_conv0
-{u'inputs': [[1, 5, 0], [1617, 0, 0]], u'name': u'part_7_conv0', 'bottom': ['data_slice'], 'top': u'part_7_conv0', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_conv0_weight'], u'op': u'Convolution'}
-1623, 	op:BatchNorm           , name:part_7_bn0                     -> part_7_bn0
-1624, 	op:Activation          , name:part_7_relu0                   -> part_7_relu0
-1625, 	op:Pooling             , name:pooling5                       -> pooling5
-1627, 	op:Convolution         , name:part_7_stage1_unit1_conv1      -> part_7_stage1_unit1_conv1
-{u'inputs': [[1625, 0, 0], [1626, 0, 0]], u'name': u'part_7_stage1_unit1_conv1', 'bottom': ['pooling5'], 'top': u'part_7_stage1_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage1_unit1_conv1_weight'], u'op': u'Convolution'}
-1632, 	op:BatchNorm           , name:part_7_stage1_unit1_bn1        -> part_7_stage1_unit1_bn1
-1633, 	op:Activation          , name:part_7_stage1_unit1_relu1      -> part_7_stage1_unit1_relu1
-1635, 	op:Convolution         , name:part_7_stage1_unit1_conv2      -> part_7_stage1_unit1_conv2
-{u'inputs': [[1633, 0, 0], [1634, 0, 0]], u'name': u'part_7_stage1_unit1_conv2', 'bottom': ['part_7_stage1_unit1_relu1'], 'top': u'part_7_stage1_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage1_unit1_conv2_weight'], u'op': u'Convolution'}
-1640, 	op:BatchNorm           , name:part_7_stage1_unit1_bn2        -> part_7_stage1_unit1_bn2
-1641, 	op:Activation          , name:part_7_stage1_unit1_relu2      -> part_7_stage1_unit1_relu2
-1643, 	op:Convolution         , name:part_7_stage1_unit1_conv_proj  -> part_7_stage1_unit1_conv_proj
-{u'inputs': [[1625, 0, 0], [1642, 0, 0]], u'name': u'part_7_stage1_unit1_conv_proj', 'bottom': ['pooling5'], 'top': u'part_7_stage1_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage1_unit1_conv_proj_weight'], u'op': u'Convolution'}
-1648, 	op:BatchNorm           , name:part_7_stage1_unit1_bn_proj    -> part_7_stage1_unit1_bn_proj
-1649, 	op:Activation          , name:part_7_stage1_unit1_relu_proj  -> part_7_stage1_unit1_relu_proj
-1650, 	op:elemwise_add        , name:_plus80                        -> _plus80
-1652, 	op:Convolution         , name:part_7_stage1_unit2_conv1      -> part_7_stage1_unit2_conv1
-{u'inputs': [[1650, 0, 0], [1651, 0, 0]], u'name': u'part_7_stage1_unit2_conv1', 'bottom': ['_plus80'], 'top': u'part_7_stage1_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage1_unit2_conv1_weight'], u'op': u'Convolution'}
-1657, 	op:BatchNorm           , name:part_7_stage1_unit2_bn1        -> part_7_stage1_unit2_bn1
-1658, 	op:Activation          , name:part_7_stage1_unit2_relu1      -> part_7_stage1_unit2_relu1
-1660, 	op:Convolution         , name:part_7_stage1_unit2_conv2      -> part_7_stage1_unit2_conv2
-{u'inputs': [[1658, 0, 0], [1659, 0, 0]], u'name': u'part_7_stage1_unit2_conv2', 'bottom': ['part_7_stage1_unit2_relu1'], 'top': u'part_7_stage1_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage1_unit2_conv2_weight'], u'op': u'Convolution'}
-1665, 	op:BatchNorm           , name:part_7_stage1_unit2_bn2        -> part_7_stage1_unit2_bn2
-1666, 	op:Activation          , name:part_7_stage1_unit2_relu2      -> part_7_stage1_unit2_relu2
-1667, 	op:elemwise_add        , name:_plus81                        -> _plus81
-1669, 	op:Convolution         , name:part_7_stage1_unit3_conv1      -> part_7_stage1_unit3_conv1
-{u'inputs': [[1667, 0, 0], [1668, 0, 0]], u'name': u'part_7_stage1_unit3_conv1', 'bottom': ['_plus81'], 'top': u'part_7_stage1_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage1_unit3_conv1_weight'], u'op': u'Convolution'}
-1674, 	op:BatchNorm           , name:part_7_stage1_unit3_bn1        -> part_7_stage1_unit3_bn1
-1675, 	op:Activation          , name:part_7_stage1_unit3_relu1      -> part_7_stage1_unit3_relu1
-1677, 	op:Convolution         , name:part_7_stage1_unit3_conv2      -> part_7_stage1_unit3_conv2
-{u'inputs': [[1675, 0, 0], [1676, 0, 0]], u'name': u'part_7_stage1_unit3_conv2', 'bottom': ['part_7_stage1_unit3_relu1'], 'top': u'part_7_stage1_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'64', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage1_unit3_conv2_weight'], u'op': u'Convolution'}
-1682, 	op:BatchNorm           , name:part_7_stage1_unit3_bn2        -> part_7_stage1_unit3_bn2
-1683, 	op:Activation          , name:part_7_stage1_unit3_relu2      -> part_7_stage1_unit3_relu2
-1684, 	op:elemwise_add        , name:_plus82                        -> _plus82
-1686, 	op:Convolution         , name:part_7_stage2_unit1_conv1      -> part_7_stage2_unit1_conv1
-{u'inputs': [[1684, 0, 0], [1685, 0, 0]], u'name': u'part_7_stage2_unit1_conv1', 'bottom': ['_plus82'], 'top': u'part_7_stage2_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage2_unit1_conv1_weight'], u'op': u'Convolution'}
-1691, 	op:BatchNorm           , name:part_7_stage2_unit1_bn1        -> part_7_stage2_unit1_bn1
-1692, 	op:Activation          , name:part_7_stage2_unit1_relu1      -> part_7_stage2_unit1_relu1
-1694, 	op:Convolution         , name:part_7_stage2_unit1_conv2      -> part_7_stage2_unit1_conv2
-{u'inputs': [[1692, 0, 0], [1693, 0, 0]], u'name': u'part_7_stage2_unit1_conv2', 'bottom': ['part_7_stage2_unit1_relu1'], 'top': u'part_7_stage2_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage2_unit1_conv2_weight'], u'op': u'Convolution'}
-1699, 	op:BatchNorm           , name:part_7_stage2_unit1_bn2        -> part_7_stage2_unit1_bn2
-1700, 	op:Activation          , name:part_7_stage2_unit1_relu2      -> part_7_stage2_unit1_relu2
-1702, 	op:Convolution         , name:part_7_stage2_unit1_conv_proj  -> part_7_stage2_unit1_conv_proj
-{u'inputs': [[1684, 0, 0], [1701, 0, 0]], u'name': u'part_7_stage2_unit1_conv_proj', 'bottom': ['_plus82'], 'top': u'part_7_stage2_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage2_unit1_conv_proj_weight'], u'op': u'Convolution'}
-1707, 	op:BatchNorm           , name:part_7_stage2_unit1_bn_proj    -> part_7_stage2_unit1_bn_proj
-1708, 	op:Activation          , name:part_7_stage2_unit1_relu_proj  -> part_7_stage2_unit1_relu_proj
-1709, 	op:elemwise_add        , name:_plus83                        -> _plus83
-1711, 	op:Convolution         , name:part_7_stage2_unit2_conv1      -> part_7_stage2_unit2_conv1
-{u'inputs': [[1709, 0, 0], [1710, 0, 0]], u'name': u'part_7_stage2_unit2_conv1', 'bottom': ['_plus83'], 'top': u'part_7_stage2_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage2_unit2_conv1_weight'], u'op': u'Convolution'}
-1716, 	op:BatchNorm           , name:part_7_stage2_unit2_bn1        -> part_7_stage2_unit2_bn1
-1717, 	op:Activation          , name:part_7_stage2_unit2_relu1      -> part_7_stage2_unit2_relu1
-1719, 	op:Convolution         , name:part_7_stage2_unit2_conv2      -> part_7_stage2_unit2_conv2
-{u'inputs': [[1717, 0, 0], [1718, 0, 0]], u'name': u'part_7_stage2_unit2_conv2', 'bottom': ['part_7_stage2_unit2_relu1'], 'top': u'part_7_stage2_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage2_unit2_conv2_weight'], u'op': u'Convolution'}
-1724, 	op:BatchNorm           , name:part_7_stage2_unit2_bn2        -> part_7_stage2_unit2_bn2
-1725, 	op:Activation          , name:part_7_stage2_unit2_relu2      -> part_7_stage2_unit2_relu2
-1726, 	op:elemwise_add        , name:_plus84                        -> _plus84
-1728, 	op:Convolution         , name:part_7_stage2_unit3_conv1      -> part_7_stage2_unit3_conv1
-{u'inputs': [[1726, 0, 0], [1727, 0, 0]], u'name': u'part_7_stage2_unit3_conv1', 'bottom': ['_plus84'], 'top': u'part_7_stage2_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage2_unit3_conv1_weight'], u'op': u'Convolution'}
-1733, 	op:BatchNorm           , name:part_7_stage2_unit3_bn1        -> part_7_stage2_unit3_bn1
-1734, 	op:Activation          , name:part_7_stage2_unit3_relu1      -> part_7_stage2_unit3_relu1
-1736, 	op:Convolution         , name:part_7_stage2_unit3_conv2      -> part_7_stage2_unit3_conv2
-{u'inputs': [[1734, 0, 0], [1735, 0, 0]], u'name': u'part_7_stage2_unit3_conv2', 'bottom': ['part_7_stage2_unit3_relu1'], 'top': u'part_7_stage2_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage2_unit3_conv2_weight'], u'op': u'Convolution'}
-1741, 	op:BatchNorm           , name:part_7_stage2_unit3_bn2        -> part_7_stage2_unit3_bn2
-1742, 	op:Activation          , name:part_7_stage2_unit3_relu2      -> part_7_stage2_unit3_relu2
-1743, 	op:elemwise_add        , name:_plus85                        -> _plus85
-1745, 	op:Convolution         , name:part_7_stage2_unit4_conv1      -> part_7_stage2_unit4_conv1
-{u'inputs': [[1743, 0, 0], [1744, 0, 0]], u'name': u'part_7_stage2_unit4_conv1', 'bottom': ['_plus85'], 'top': u'part_7_stage2_unit4_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage2_unit4_conv1_weight'], u'op': u'Convolution'}
-1750, 	op:BatchNorm           , name:part_7_stage2_unit4_bn1        -> part_7_stage2_unit4_bn1
-1751, 	op:Activation          , name:part_7_stage2_unit4_relu1      -> part_7_stage2_unit4_relu1
-1753, 	op:Convolution         , name:part_7_stage2_unit4_conv2      -> part_7_stage2_unit4_conv2
-{u'inputs': [[1751, 0, 0], [1752, 0, 0]], u'name': u'part_7_stage2_unit4_conv2', 'bottom': ['part_7_stage2_unit4_relu1'], 'top': u'part_7_stage2_unit4_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'128', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage2_unit4_conv2_weight'], u'op': u'Convolution'}
-1758, 	op:BatchNorm           , name:part_7_stage2_unit4_bn2        -> part_7_stage2_unit4_bn2
-1759, 	op:Activation          , name:part_7_stage2_unit4_relu2      -> part_7_stage2_unit4_relu2
-1760, 	op:elemwise_add        , name:_plus86                        -> _plus86
-1762, 	op:Convolution         , name:part_7_stage3_unit1_conv1      -> part_7_stage3_unit1_conv1
-{u'inputs': [[1760, 0, 0], [1761, 0, 0]], u'name': u'part_7_stage3_unit1_conv1', 'bottom': ['_plus86'], 'top': u'part_7_stage3_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage3_unit1_conv1_weight'], u'op': u'Convolution'}
-1767, 	op:BatchNorm           , name:part_7_stage3_unit1_bn1        -> part_7_stage3_unit1_bn1
-1768, 	op:Activation          , name:part_7_stage3_unit1_relu1      -> part_7_stage3_unit1_relu1
-1770, 	op:Convolution         , name:part_7_stage3_unit1_conv2      -> part_7_stage3_unit1_conv2
-{u'inputs': [[1768, 0, 0], [1769, 0, 0]], u'name': u'part_7_stage3_unit1_conv2', 'bottom': ['part_7_stage3_unit1_relu1'], 'top': u'part_7_stage3_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage3_unit1_conv2_weight'], u'op': u'Convolution'}
-1775, 	op:BatchNorm           , name:part_7_stage3_unit1_bn2        -> part_7_stage3_unit1_bn2
-1776, 	op:Activation          , name:part_7_stage3_unit1_relu2      -> part_7_stage3_unit1_relu2
-1778, 	op:Convolution         , name:part_7_stage3_unit1_conv_proj  -> part_7_stage3_unit1_conv_proj
-{u'inputs': [[1760, 0, 0], [1777, 0, 0]], u'name': u'part_7_stage3_unit1_conv_proj', 'bottom': ['_plus86'], 'top': u'part_7_stage3_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage3_unit1_conv_proj_weight'], u'op': u'Convolution'}
-1783, 	op:BatchNorm           , name:part_7_stage3_unit1_bn_proj    -> part_7_stage3_unit1_bn_proj
-1784, 	op:Activation          , name:part_7_stage3_unit1_relu_proj  -> part_7_stage3_unit1_relu_proj
-1785, 	op:elemwise_add        , name:_plus87                        -> _plus87
-1787, 	op:Convolution         , name:part_7_stage3_unit2_conv1      -> part_7_stage3_unit2_conv1
-{u'inputs': [[1785, 0, 0], [1786, 0, 0]], u'name': u'part_7_stage3_unit2_conv1', 'bottom': ['_plus87'], 'top': u'part_7_stage3_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage3_unit2_conv1_weight'], u'op': u'Convolution'}
-1792, 	op:BatchNorm           , name:part_7_stage3_unit2_bn1        -> part_7_stage3_unit2_bn1
-1793, 	op:Activation          , name:part_7_stage3_unit2_relu1      -> part_7_stage3_unit2_relu1
-1795, 	op:Convolution         , name:part_7_stage3_unit2_conv2      -> part_7_stage3_unit2_conv2
-{u'inputs': [[1793, 0, 0], [1794, 0, 0]], u'name': u'part_7_stage3_unit2_conv2', 'bottom': ['part_7_stage3_unit2_relu1'], 'top': u'part_7_stage3_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage3_unit2_conv2_weight'], u'op': u'Convolution'}
-1800, 	op:BatchNorm           , name:part_7_stage3_unit2_bn2        -> part_7_stage3_unit2_bn2
-1801, 	op:Activation          , name:part_7_stage3_unit2_relu2      -> part_7_stage3_unit2_relu2
-1802, 	op:elemwise_add        , name:_plus88                        -> _plus88
-1804, 	op:Convolution         , name:part_7_stage3_unit3_conv1      -> part_7_stage3_unit3_conv1
-{u'inputs': [[1802, 0, 0], [1803, 0, 0]], u'name': u'part_7_stage3_unit3_conv1', 'bottom': ['_plus88'], 'top': u'part_7_stage3_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage3_unit3_conv1_weight'], u'op': u'Convolution'}
-1809, 	op:BatchNorm           , name:part_7_stage3_unit3_bn1        -> part_7_stage3_unit3_bn1
-1810, 	op:Activation          , name:part_7_stage3_unit3_relu1      -> part_7_stage3_unit3_relu1
-1812, 	op:Convolution         , name:part_7_stage3_unit3_conv2      -> part_7_stage3_unit3_conv2
-{u'inputs': [[1810, 0, 0], [1811, 0, 0]], u'name': u'part_7_stage3_unit3_conv2', 'bottom': ['part_7_stage3_unit3_relu1'], 'top': u'part_7_stage3_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage3_unit3_conv2_weight'], u'op': u'Convolution'}
-1817, 	op:BatchNorm           , name:part_7_stage3_unit3_bn2        -> part_7_stage3_unit3_bn2
-1818, 	op:Activation          , name:part_7_stage3_unit3_relu2      -> part_7_stage3_unit3_relu2
-1819, 	op:elemwise_add        , name:_plus89                        -> _plus89
-1821, 	op:Convolution         , name:part_7_stage3_unit4_conv1      -> part_7_stage3_unit4_conv1
-{u'inputs': [[1819, 0, 0], [1820, 0, 0]], u'name': u'part_7_stage3_unit4_conv1', 'bottom': ['_plus89'], 'top': u'part_7_stage3_unit4_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage3_unit4_conv1_weight'], u'op': u'Convolution'}
-1826, 	op:BatchNorm           , name:part_7_stage3_unit4_bn1        -> part_7_stage3_unit4_bn1
-1827, 	op:Activation          , name:part_7_stage3_unit4_relu1      -> part_7_stage3_unit4_relu1
-1829, 	op:Convolution         , name:part_7_stage3_unit4_conv2      -> part_7_stage3_unit4_conv2
-{u'inputs': [[1827, 0, 0], [1828, 0, 0]], u'name': u'part_7_stage3_unit4_conv2', 'bottom': ['part_7_stage3_unit4_relu1'], 'top': u'part_7_stage3_unit4_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage3_unit4_conv2_weight'], u'op': u'Convolution'}
-1834, 	op:BatchNorm           , name:part_7_stage3_unit4_bn2        -> part_7_stage3_unit4_bn2
-1835, 	op:Activation          , name:part_7_stage3_unit4_relu2      -> part_7_stage3_unit4_relu2
-1836, 	op:elemwise_add        , name:_plus90                        -> _plus90
-1838, 	op:Convolution         , name:part_7_stage3_unit5_conv1      -> part_7_stage3_unit5_conv1
-{u'inputs': [[1836, 0, 0], [1837, 0, 0]], u'name': u'part_7_stage3_unit5_conv1', 'bottom': ['_plus90'], 'top': u'part_7_stage3_unit5_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage3_unit5_conv1_weight'], u'op': u'Convolution'}
-1843, 	op:BatchNorm           , name:part_7_stage3_unit5_bn1        -> part_7_stage3_unit5_bn1
-1844, 	op:Activation          , name:part_7_stage3_unit5_relu1      -> part_7_stage3_unit5_relu1
-1846, 	op:Convolution         , name:part_7_stage3_unit5_conv2      -> part_7_stage3_unit5_conv2
-{u'inputs': [[1844, 0, 0], [1845, 0, 0]], u'name': u'part_7_stage3_unit5_conv2', 'bottom': ['part_7_stage3_unit5_relu1'], 'top': u'part_7_stage3_unit5_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage3_unit5_conv2_weight'], u'op': u'Convolution'}
-1851, 	op:BatchNorm           , name:part_7_stage3_unit5_bn2        -> part_7_stage3_unit5_bn2
-1852, 	op:Activation          , name:part_7_stage3_unit5_relu2      -> part_7_stage3_unit5_relu2
-1853, 	op:elemwise_add        , name:_plus91                        -> _plus91
-1855, 	op:Convolution         , name:part_7_stage3_unit6_conv1      -> part_7_stage3_unit6_conv1
-{u'inputs': [[1853, 0, 0], [1854, 0, 0]], u'name': u'part_7_stage3_unit6_conv1', 'bottom': ['_plus91'], 'top': u'part_7_stage3_unit6_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage3_unit6_conv1_weight'], u'op': u'Convolution'}
-1860, 	op:BatchNorm           , name:part_7_stage3_unit6_bn1        -> part_7_stage3_unit6_bn1
-1861, 	op:Activation          , name:part_7_stage3_unit6_relu1      -> part_7_stage3_unit6_relu1
-1863, 	op:Convolution         , name:part_7_stage3_unit6_conv2      -> part_7_stage3_unit6_conv2
-{u'inputs': [[1861, 0, 0], [1862, 0, 0]], u'name': u'part_7_stage3_unit6_conv2', 'bottom': ['part_7_stage3_unit6_relu1'], 'top': u'part_7_stage3_unit6_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'256', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage3_unit6_conv2_weight'], u'op': u'Convolution'}
-1868, 	op:BatchNorm           , name:part_7_stage3_unit6_bn2        -> part_7_stage3_unit6_bn2
-1869, 	op:Activation          , name:part_7_stage3_unit6_relu2      -> part_7_stage3_unit6_relu2
-1870, 	op:elemwise_add        , name:_plus92                        -> _plus92
-1872, 	op:Convolution         , name:part_7_stage4_unit1_conv1      -> part_7_stage4_unit1_conv1
-{u'inputs': [[1870, 0, 0], [1871, 0, 0]], u'name': u'part_7_stage4_unit1_conv1', 'bottom': ['_plus92'], 'top': u'part_7_stage4_unit1_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage4_unit1_conv1_weight'], u'op': u'Convolution'}
-1877, 	op:BatchNorm           , name:part_7_stage4_unit1_bn1        -> part_7_stage4_unit1_bn1
-1878, 	op:Activation          , name:part_7_stage4_unit1_relu1      -> part_7_stage4_unit1_relu1
-1880, 	op:Convolution         , name:part_7_stage4_unit1_conv2      -> part_7_stage4_unit1_conv2
-{u'inputs': [[1878, 0, 0], [1879, 0, 0]], u'name': u'part_7_stage4_unit1_conv2', 'bottom': ['part_7_stage4_unit1_relu1'], 'top': u'part_7_stage4_unit1_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage4_unit1_conv2_weight'], u'op': u'Convolution'}
-1885, 	op:BatchNorm           , name:part_7_stage4_unit1_bn2        -> part_7_stage4_unit1_bn2
-1886, 	op:Activation          , name:part_7_stage4_unit1_relu2      -> part_7_stage4_unit1_relu2
-1888, 	op:Convolution         , name:part_7_stage4_unit1_conv_proj  -> part_7_stage4_unit1_conv_proj
-{u'inputs': [[1870, 0, 0], [1887, 0, 0]], u'name': u'part_7_stage4_unit1_conv_proj', 'bottom': ['_plus92'], 'top': u'part_7_stage4_unit1_conv_proj', u'param': {u'no_bias': u'True', u'kernel': u'(1,1)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(2,2)', u'cudnn_off': u'False', u'pad': u'(0,0)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage4_unit1_conv_proj_weight'], u'op': u'Convolution'}
-1893, 	op:BatchNorm           , name:part_7_stage4_unit1_bn_proj    -> part_7_stage4_unit1_bn_proj
-1894, 	op:Activation          , name:part_7_stage4_unit1_relu_proj  -> part_7_stage4_unit1_relu_proj
-1895, 	op:elemwise_add        , name:_plus93                        -> _plus93
-1897, 	op:Convolution         , name:part_7_stage4_unit2_conv1      -> part_7_stage4_unit2_conv1
-{u'inputs': [[1895, 0, 0], [1896, 0, 0]], u'name': u'part_7_stage4_unit2_conv1', 'bottom': ['_plus93'], 'top': u'part_7_stage4_unit2_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage4_unit2_conv1_weight'], u'op': u'Convolution'}
-1902, 	op:BatchNorm           , name:part_7_stage4_unit2_bn1        -> part_7_stage4_unit2_bn1
-1903, 	op:Activation          , name:part_7_stage4_unit2_relu1      -> part_7_stage4_unit2_relu1
-1905, 	op:Convolution         , name:part_7_stage4_unit2_conv2      -> part_7_stage4_unit2_conv2
-{u'inputs': [[1903, 0, 0], [1904, 0, 0]], u'name': u'part_7_stage4_unit2_conv2', 'bottom': ['part_7_stage4_unit2_relu1'], 'top': u'part_7_stage4_unit2_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage4_unit2_conv2_weight'], u'op': u'Convolution'}
-1910, 	op:BatchNorm           , name:part_7_stage4_unit2_bn2        -> part_7_stage4_unit2_bn2
-1911, 	op:Activation          , name:part_7_stage4_unit2_relu2      -> part_7_stage4_unit2_relu2
-1912, 	op:elemwise_add        , name:_plus94                        -> _plus94
-1914, 	op:Convolution         , name:part_7_stage4_unit3_conv1      -> part_7_stage4_unit3_conv1
-{u'inputs': [[1912, 0, 0], [1913, 0, 0]], u'name': u'part_7_stage4_unit3_conv1', 'bottom': ['_plus94'], 'top': u'part_7_stage4_unit3_conv1', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage4_unit3_conv1_weight'], u'op': u'Convolution'}
-1919, 	op:BatchNorm           , name:part_7_stage4_unit3_bn1        -> part_7_stage4_unit3_bn1
-1920, 	op:Activation          , name:part_7_stage4_unit3_relu1      -> part_7_stage4_unit3_relu1
-1922, 	op:Convolution         , name:part_7_stage4_unit3_conv2      -> part_7_stage4_unit3_conv2
-{u'inputs': [[1920, 0, 0], [1921, 0, 0]], u'name': u'part_7_stage4_unit3_conv2', 'bottom': ['part_7_stage4_unit3_relu1'], 'top': u'part_7_stage4_unit3_conv2', u'param': {u'no_bias': u'True', u'kernel': u'(3,3)', u'num_group': u'1', u'dilate': u'(1,1)', u'num_filter': u'512', u'stride': u'(1,1)', u'cudnn_off': u'False', u'pad': u'(1,1)', u'workspace': u'256', u'cudnn_tune': u'limited_workspace'}, 'params': ['part_7_stage4_unit3_conv2_weight'], u'op': u'Convolution'}
-1927, 	op:BatchNorm           , name:part_7_stage4_unit3_bn2        -> part_7_stage4_unit3_bn2
-1928, 	op:Activation          , name:part_7_stage4_unit3_relu2      -> part_7_stage4_unit3_relu2
-1929, 	op:elemwise_add        , name:_plus95                        -> _plus95
-1930, 	op:Pooling             , name:part_7_pool1                   -> part_7_pool1
-1931, 	op:Flatten             , name:part_7_flat_pool               -> part_7_flat_pool
-1936, 	op:BatchNorm           , name:part_7_bn_pool                 -> part_7_bn_pool
-1939, 	op:FullyConnected      , name:part_7_flat                    -> part_7_flat
-1940, 	op:Concat              , name:fea_concat                     -> fea_concat
-1941, 	op:Flatten             , name:fea_flat                       -> fea_flat
-1942, 	op:SliceChannel        , name:slicechannel0                  -> slicechannel0
-{u'inputs': [[1941, 0, 0]], u'name': u'slicechannel0', 'bottom': ['fea_flat'], 'top': u'slicechannel0', u'param': {u'num_outputs': u'6'}, 'params': [], u'op': u'SliceChannel'}
-1943, 	op:L2Normalization     , name:l2normalization0               -> l2normalization0
+0 part_0_bn0_beta
+1 part_0_bn0_gamma
+2 part_0_bn0_moving_mean
+3 part_0_bn0_moving_var
+4 part_0_bn_pool_beta
+5 part_0_bn_pool_gamma
+6 part_0_bn_pool_moving_mean
+7 part_0_bn_pool_moving_var
+8 part_0_conv0_weight
+9 part_0_flat_bias
+10 part_0_flat_weight
+11 part_0_stage1_unit1_bn1_beta
+12 part_0_stage1_unit1_bn1_gamma
+13 part_0_stage1_unit1_bn1_moving_mean
+14 part_0_stage1_unit1_bn1_moving_var
+15 part_0_stage1_unit1_bn2_beta
+16 part_0_stage1_unit1_bn2_gamma
+17 part_0_stage1_unit1_bn2_moving_mean
+18 part_0_stage1_unit1_bn2_moving_var
+19 part_0_stage1_unit1_bn_proj_beta
+20 part_0_stage1_unit1_bn_proj_gamma
+21 part_0_stage1_unit1_bn_proj_moving_mean
+22 part_0_stage1_unit1_bn_proj_moving_var
+23 part_0_stage1_unit1_conv1_weight
+24 part_0_stage1_unit1_conv2_weight
+25 part_0_stage1_unit1_conv_proj_weight
+26 part_0_stage1_unit2_bn1_beta
+27 part_0_stage1_unit2_bn1_gamma
+28 part_0_stage1_unit2_bn1_moving_mean
+29 part_0_stage1_unit2_bn1_moving_var
+30 part_0_stage1_unit2_bn2_beta
+31 part_0_stage1_unit2_bn2_gamma
+32 part_0_stage1_unit2_bn2_moving_mean
+33 part_0_stage1_unit2_bn2_moving_var
+34 part_0_stage1_unit2_conv1_weight
+35 part_0_stage1_unit2_conv2_weight
+36 part_0_stage1_unit3_bn1_beta
+37 part_0_stage1_unit3_bn1_gamma
+38 part_0_stage1_unit3_bn1_moving_mean
+39 part_0_stage1_unit3_bn1_moving_var
+40 part_0_stage1_unit3_bn2_beta
+41 part_0_stage1_unit3_bn2_gamma
+42 part_0_stage1_unit3_bn2_moving_mean
+43 part_0_stage1_unit3_bn2_moving_var
+44 part_0_stage1_unit3_conv1_weight
+45 part_0_stage1_unit3_conv2_weight
+46 part_0_stage2_unit1_bn1_beta
+47 part_0_stage2_unit1_bn1_gamma
+48 part_0_stage2_unit1_bn1_moving_mean
+49 part_0_stage2_unit1_bn1_moving_var
+50 part_0_stage2_unit1_bn2_beta
+51 part_0_stage2_unit1_bn2_gamma
+52 part_0_stage2_unit1_bn2_moving_mean
+53 part_0_stage2_unit1_bn2_moving_var
+54 part_0_stage2_unit1_bn_proj_beta
+55 part_0_stage2_unit1_bn_proj_gamma
+56 part_0_stage2_unit1_bn_proj_moving_mean
+57 part_0_stage2_unit1_bn_proj_moving_var
+58 part_0_stage2_unit1_conv1_weight
+59 part_0_stage2_unit1_conv2_weight
+60 part_0_stage2_unit1_conv_proj_weight
+61 part_0_stage2_unit2_bn1_beta
+62 part_0_stage2_unit2_bn1_gamma
+63 part_0_stage2_unit2_bn1_moving_mean
+64 part_0_stage2_unit2_bn1_moving_var
+65 part_0_stage2_unit2_bn2_beta
+66 part_0_stage2_unit2_bn2_gamma
+67 part_0_stage2_unit2_bn2_moving_mean
+68 part_0_stage2_unit2_bn2_moving_var
+69 part_0_stage2_unit2_conv1_weight
+70 part_0_stage2_unit2_conv2_weight
+71 part_0_stage2_unit3_bn1_beta
+72 part_0_stage2_unit3_bn1_gamma
+73 part_0_stage2_unit3_bn1_moving_mean
+74 part_0_stage2_unit3_bn1_moving_var
+75 part_0_stage2_unit3_bn2_beta
+76 part_0_stage2_unit3_bn2_gamma
+77 part_0_stage2_unit3_bn2_moving_mean
+78 part_0_stage2_unit3_bn2_moving_var
+79 part_0_stage2_unit3_conv1_weight
+80 part_0_stage2_unit3_conv2_weight
+81 part_0_stage2_unit4_bn1_beta
+82 part_0_stage2_unit4_bn1_gamma
+83 part_0_stage2_unit4_bn1_moving_mean
+84 part_0_stage2_unit4_bn1_moving_var
+85 part_0_stage2_unit4_bn2_beta
+86 part_0_stage2_unit4_bn2_gamma
+87 part_0_stage2_unit4_bn2_moving_mean
+88 part_0_stage2_unit4_bn2_moving_var
+89 part_0_stage2_unit4_conv1_weight
+90 part_0_stage2_unit4_conv2_weight
+91 part_0_stage3_unit1_bn1_beta
+92 part_0_stage3_unit1_bn1_gamma
+93 part_0_stage3_unit1_bn1_moving_mean
+94 part_0_stage3_unit1_bn1_moving_var
+95 part_0_stage3_unit1_bn2_beta
+96 part_0_stage3_unit1_bn2_gamma
+97 part_0_stage3_unit1_bn2_moving_mean
+98 part_0_stage3_unit1_bn2_moving_var
+99 part_0_stage3_unit1_bn_proj_beta
+100 part_0_stage3_unit1_bn_proj_gamma
+101 part_0_stage3_unit1_bn_proj_moving_mean
+102 part_0_stage3_unit1_bn_proj_moving_var
+103 part_0_stage3_unit1_conv1_weight
+104 part_0_stage3_unit1_conv2_weight
+105 part_0_stage3_unit1_conv_proj_weight
+106 part_0_stage3_unit2_bn1_beta
+107 part_0_stage3_unit2_bn1_gamma
+108 part_0_stage3_unit2_bn1_moving_mean
+109 part_0_stage3_unit2_bn1_moving_var
+110 part_0_stage3_unit2_bn2_beta
+111 part_0_stage3_unit2_bn2_gamma
+112 part_0_stage3_unit2_bn2_moving_mean
+113 part_0_stage3_unit2_bn2_moving_var
+114 part_0_stage3_unit2_conv1_weight
+115 part_0_stage3_unit2_conv2_weight
+116 part_0_stage3_unit3_bn1_beta
+117 part_0_stage3_unit3_bn1_gamma
+118 part_0_stage3_unit3_bn1_moving_mean
+119 part_0_stage3_unit3_bn1_moving_var
+120 part_0_stage3_unit3_bn2_beta
+121 part_0_stage3_unit3_bn2_gamma
+122 part_0_stage3_unit3_bn2_moving_mean
+123 part_0_stage3_unit3_bn2_moving_var
+124 part_0_stage3_unit3_conv1_weight
+125 part_0_stage3_unit3_conv2_weight
+126 part_0_stage3_unit4_bn1_beta
+127 part_0_stage3_unit4_bn1_gamma
+128 part_0_stage3_unit4_bn1_moving_mean
+129 part_0_stage3_unit4_bn1_moving_var
+130 part_0_stage3_unit4_bn2_beta
+131 part_0_stage3_unit4_bn2_gamma
+132 part_0_stage3_unit4_bn2_moving_mean
+133 part_0_stage3_unit4_bn2_moving_var
+134 part_0_stage3_unit4_conv1_weight
+135 part_0_stage3_unit4_conv2_weight
+136 part_0_stage3_unit5_bn1_beta
+137 part_0_stage3_unit5_bn1_gamma
+138 part_0_stage3_unit5_bn1_moving_mean
+139 part_0_stage3_unit5_bn1_moving_var
+140 part_0_stage3_unit5_bn2_beta
+141 part_0_stage3_unit5_bn2_gamma
+142 part_0_stage3_unit5_bn2_moving_mean
+143 part_0_stage3_unit5_bn2_moving_var
+144 part_0_stage3_unit5_conv1_weight
+145 part_0_stage3_unit5_conv2_weight
+146 part_0_stage3_unit6_bn1_beta
+147 part_0_stage3_unit6_bn1_gamma
+148 part_0_stage3_unit6_bn1_moving_mean
+149 part_0_stage3_unit6_bn1_moving_var
+150 part_0_stage3_unit6_bn2_beta
+151 part_0_stage3_unit6_bn2_gamma
+152 part_0_stage3_unit6_bn2_moving_mean
+153 part_0_stage3_unit6_bn2_moving_var
+154 part_0_stage3_unit6_conv1_weight
+155 part_0_stage3_unit6_conv2_weight
+156 part_0_stage4_unit1_bn1_beta
+157 part_0_stage4_unit1_bn1_gamma
+158 part_0_stage4_unit1_bn1_moving_mean
+159 part_0_stage4_unit1_bn1_moving_var
+160 part_0_stage4_unit1_bn2_beta
+161 part_0_stage4_unit1_bn2_gamma
+162 part_0_stage4_unit1_bn2_moving_mean
+163 part_0_stage4_unit1_bn2_moving_var
+164 part_0_stage4_unit1_bn_proj_beta
+165 part_0_stage4_unit1_bn_proj_gamma
+166 part_0_stage4_unit1_bn_proj_moving_mean
+167 part_0_stage4_unit1_bn_proj_moving_var
+168 part_0_stage4_unit1_conv1_weight
+169 part_0_stage4_unit1_conv2_weight
+170 part_0_stage4_unit1_conv_proj_weight
+171 part_0_stage4_unit2_bn1_beta
+172 part_0_stage4_unit2_bn1_gamma
+173 part_0_stage4_unit2_bn1_moving_mean
+174 part_0_stage4_unit2_bn1_moving_var
+175 part_0_stage4_unit2_bn2_beta
+176 part_0_stage4_unit2_bn2_gamma
+177 part_0_stage4_unit2_bn2_moving_mean
+178 part_0_stage4_unit2_bn2_moving_var
+179 part_0_stage4_unit2_conv1_weight
+180 part_0_stage4_unit2_conv2_weight
+181 part_0_stage4_unit3_bn1_beta
+182 part_0_stage4_unit3_bn1_gamma
+183 part_0_stage4_unit3_bn1_moving_mean
+184 part_0_stage4_unit3_bn1_moving_var
+185 part_0_stage4_unit3_bn2_beta
+186 part_0_stage4_unit3_bn2_gamma
+187 part_0_stage4_unit3_bn2_moving_mean
+188 part_0_stage4_unit3_bn2_moving_var
+189 part_0_stage4_unit3_conv1_weight
+190 part_0_stage4_unit3_conv2_weight
