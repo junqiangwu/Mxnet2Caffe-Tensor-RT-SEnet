@@ -11,9 +11,6 @@ parser = argparse.ArgumentParser(description='Convert MXNet jason to Caffe proto
 parser.add_argument('--mx-json',     type=str, default='to_be_converted/base-symbol.json')
 parser.add_argument('--cf-prototxt', type=str, default='to_be_converted/be-converted.prototxt')
 
-# parser.add_argument('--mx-json',     type=str, default='single_patch_mxnet/test-symbol.json')
-# parser.add_argument('--cf-prototxt', type=str, default='single_patch_mxnet/single-test.prototxt')
-
 args = parser.parse_args()
 
 with open(args.mx_json) as json_file:    

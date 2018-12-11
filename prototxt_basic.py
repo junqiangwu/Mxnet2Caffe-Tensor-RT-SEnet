@@ -9,7 +9,6 @@ def data(txt_file, info):
   txt_file.write('  top: "data"\n')
   txt_file.write('  input_param {\n')
 #  txt_file.write('    shape: { dim: 10 dim: 3 dim: 224 dim: 224 }\n') # TODO
-#  txt_file.write('    shape: { dim: 1 dim: 3 dim: 400 dim: 400 }\n') # TODO
   txt_file.write('    shape: { dim: 1 dim: 3 dim: 108 dim: 108 }\n') # TODO
   txt_file.write('  }\n')
   txt_file.write('}\n')
@@ -32,6 +31,7 @@ def L2Normalization(txt_file, info):
   txt_file.write('  type: "L2Normalization"\n')
   txt_file.write('}\n')
   txt_file.write('\n')
+
 # ?????
 def Cast(txt_file, info):
   pass
@@ -52,7 +52,7 @@ def Convolution(txt_file, info):
   txt_file.write('		kernel_size: %s\n'  % info['attrs']['kernel'].split('(')[1].split(',')[0]) # TODO
   if 'pad' not in info['attrs']:
     print('miss Conv_pad')
-    #txt_file.write('		pad: %s\n' % 0)  # TODO
+    txt_file.write('		pad: %s\n' % 0)  # TODO
   else:
     txt_file.write('		pad: %s\n'          % info['attrs']['pad'].split('(')[1].split(',')[0]) # TODO
 #  txt_file.write('		group: %s\n'        % info['attrs']['num_group'])
@@ -78,12 +78,8 @@ def BatchNorm(txt_file, info):
   txt_file.write('  batch_norm_param {\n')
   txt_file.write('    use_global_stats: true\n')        # TODO
   txt_file.write('    moving_average_fraction: 0.9\n')  # TODO
-#  txt_file.write('    eps: 0.001\n')                    # TODO
   txt_file.write('    eps: 0.00002\n')                    # TODO
-#  txt_file.write('    eps: 0.0000002\n')                    # TODO
-#  txt_file.write('    eps: 0.0000002\n')                    # TODO
-#  txt_file.write('    eps: 2e-20\n')                    # TODO
-#  txt_file.write('    eps: 0\n')                    # TODO
+
   txt_file.write('  }\n')
   txt_file.write('}\n')
   # if info['fix_gamma'] is "False":                    # TODO
@@ -97,12 +93,19 @@ def BatchNorm(txt_file, info):
   txt_file.write('\n')
   pass
 
+
 def Activation(txt_file, info):
   txt_file.write('layer {\n')
   txt_file.write('  bottom: "%s"\n'       % info['bottom'][0])
   txt_file.write('  top: "%s"\n'          % info['top'])
   txt_file.write('  name: "%s"\n'         % info['top'])
-  txt_file.write('  type: "ReLU"\n')      # TODO
+  if info['attrs']['act_type'] == 'sigmoid':   # TODO
+    txt_file.write('  type: "Sigmoid"\n')
+  elif info['attrs']['act_type'] == 'relu':
+    txt_file.write('  type: "ReLU" \n')
+  else:
+    print "Unknown avtivate_function" ,info['attrs']['act_type']
+
   txt_file.write('}\n')
   txt_file.write('\n')
   pass
@@ -207,11 +210,11 @@ def Reshape(txt_file,info):
   txt_file.write('  type: "Reshape"\n')
   txt_file.write('  reshape_param {\n')
   txt_file.write('    shape {\n')
-  txt_file.write('      dim: %s\n'  % info['attrs']['shape'].split('(')[1].split(',')[0])
   txt_file.write('      dim: %s\n'       % info['attrs']['shape'].split('(')[1].split(',')[1])
   txt_file.write('      dim: %s\n'          % info['attrs']['shape'].split('(')[1].split(',')[2])
   txt_file.write('      dim: %s\n' % info['attrs']['shape'].split(')')[0].split(',')[3])
   txt_file.write('    }\n')
+  txt_file.write('    axis: 1  \n')
   txt_file.write('  }\n')
   txt_file.write('}\n')
   txt_file.write('\n')
