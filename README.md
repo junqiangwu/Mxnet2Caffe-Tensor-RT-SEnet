@@ -1,22 +1,24 @@
-### MXNet2Caffe: Convert MXNet model to Caffe model,And use Tensor-RT to improve performance
+### MXNet2Caffe: Convert MXNet model to Caffe model,And use Tensor-RT Plugin_Class to improve performance (SEnet)
+
+- caffe_plugin_layer
+- mxnet2caffe 
+- caffe2TensorRT
+- TensorRT_plugin_layer
+ 
+   Provide mxnet to caffe conversion tool,currently supports Conv、BN、Elemwise、Concat、Pooling、Flatten、
+Cast、Fully、Slice、L2、Reshape、Broadcast etc. And then use the **Tensorrt** engine to parse the caffe model 
+to improve performance.The project was successfully tested on SEnet.
     
-   提供了Mxnet常见结构转换为caffe模型，新增了broadcast_mul 和 Reshape,提供的test-convert-model，
- 我已经将转换后的caffe模型在Tensor RT中测试，运行正常，后面将在Tensor RT中集成broadcast_mul 和 Reshape
- 
- 
-## Brief Guide
+## caffe_plugin_layer
+> The caffe framework does't support many Layers_op. If you need to convert a special layer,
+ you need to add a layer plugin in the caffe framework and register the Layer_param. 
+ Otherwise, you will get an error when building the network structure using this tool.
 
-- 首先运行json2prototxt.py，将mxnet模型的结构转换为prototxt格式，
-- 然后，运行mxnet2caffe.py 使用pycaffe提供的API读取prototxt的进行网络结构构建，
-- 读取mxnet保存的param参数，将参数键值对复制到caffemodel文件中即可；
 
-### Caffe_plugin_layer
-
-> caffe框架对很多Layer不支持，如果你需要转换特殊的层，则需要自己在caffe框架添加层插件，并注册Layer_param，否则在构建网络结构的时候会报错
-
-- 在caffe/src/caffe/layers/  目录下添加层实现   如broadcast_mul.cpp  broadcast_mul.cu（非必须）
-- 在caffe/include/caffe/layers/ 目录下添加层申明  如 broadcast_mul.hpp
-- 在caffe/src/caffe/proto/caffe.proto 中注册Layer_param(从prototxt中读取Layer所需参数)
+- Add layer implementations in the caffe/src/caffe/layers/ directory, 
+such as broadcast_mul.cpp broadcast_mul.cu,You need to provide forward and reverse operations.
+- Add a layer declaration in the caffe/include/caffe/layers/ directory, such as broadcast_mul.hpp
+- Register Layer_param in caffe/src/caffe/proto/caffe.proto (read the parameters required for the Layer from prototxt)
 
 ```
 message LayerParameter {
@@ -33,14 +35,49 @@ message BroadcastmulParameter {
    
 } 
 ```
-  
-- 重新make 生成libcaffe.so
-- sudo make pycaffe 重新编译python接口(切记)
+- Re-make build libcaffe.so
+- sudo make pycaffe recompile python interface ***
 
 
-## Tensor RT
 
-- 因为我要移植到Tensor RT引擎中，所以转换时仅提供了broadcast_mul_layer的空壳函数
+## mxnet2caffe
+- First,you should run json2prototxt.py to convert the structure(json) of the mxnet model to prototxt format.
+- Then, run mxnet2caffe.py to read the prototxt network structure build using the API provided by pycaffe.
+- Using mxnet_Api Read the param parameter saved by mxnet, and copy the parameter key value pair into the caffemodel file;
 
 
- 
+## caffe2TensorRT and TensorRT_plugin_layer
+> The tensorrt engine can directly parse the caffe model. For unsupported OPs, you can manually add them using
+ the interface. This project adds a broadcast operation. In addition, it also tests the Pooling_layer，It also adds a test layer, 
+ which can separately print the parameters in the structure and assist the Debug.
+
+添加自定义层主要包括两个步骤，
+
+- Firsy,Inherit the IPluginExt interface to create a custom layer class
+
+- Create a PluginFactory function that will be used to add custom layer classes to the network.
+
+```angular2html
+
+  virtual int getNbOutputs() const = 0;
+
+  virtual Dims getOutputDimensions(int index, const Dims* inputs, int nbInputDims) = 0;
+
+  virtual void configure(const Dims* inputDims, int nbInputs, const Dims* outputDims, int nbOutputs, int maxBatchSize) = 0;
+
+  virtual int initialize() = 0;
+
+  virtual void terminate() = 0;
+
+  virtual size_t getWorkspaceSize(int maxBatchSize) const = 0;
+
+  virtual int enqueue(int batchSize, const void*const * inputs, void** outputs, void* workspace, cudaStream_t stream) = 0;
+
+  virtual size_t getSerializationSize() = 0;
+
+  virtual void serialize(void* buffer) = 0;
+
+```
+This project provide Pooling, broadcast, and test_layer,you can see the implementation in the code.
+
+
