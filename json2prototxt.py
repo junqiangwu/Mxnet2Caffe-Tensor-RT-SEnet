@@ -4,6 +4,8 @@ import sys
 import argparse
 import json
 from prototxt_basic import *
+import logging
+logging.basicConfig(level = logging.INFO)
 
 # single_patch_mxnet/test-symbol.json
 
@@ -18,8 +20,8 @@ with open(args.mx_json) as json_file:
 
 with open(args.cf_prototxt, "w") as prototxt_file:
   for i_node in range(0,len(jdata['nodes'])):
-    #print(i_node,jdata['nodes'][i_node]['name'])
-    # node_i  单节点的所有信息
+    #logging.info("i_node[%d],'name' %s" %(i_node,jdata['nodes'][i_node]['name']))
+  
     node_i    = jdata['nodes'][i_node]
 
     if str(node_i['op']) == 'null' and str(node_i['name']) != 'data':
@@ -50,7 +52,7 @@ with open(args.cf_prototxt, "w") as prototxt_file:
       if str(input_i['op']) == 'null':
         info['params'].append(str(input_i['name']))
         if not str(input_i['name']).startswith(str(node_i['name'])):
-          print('           use shared weight -> %s'% str(input_i['name']))
+          logging.info('           use shared weight -> %s'% str(input_i['name']))
           info['share'] = True
       
     write_node(prototxt_file, info)

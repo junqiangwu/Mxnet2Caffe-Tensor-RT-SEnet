@@ -1,5 +1,7 @@
 # prototxt_basic
 import sys
+import logging
+logging.basicConfig(level = logging.INFO)
 
 def data(txt_file, info):
   txt_file.write('name: "arcface"\n')
@@ -37,7 +39,7 @@ def Cast(txt_file, info):
   pass
 
 def Convolution(txt_file, info):
-  #print info
+  
   if info['attrs']['no_bias'] == 'True':
     bias_term = 'false'
   else:
@@ -51,7 +53,7 @@ def Convolution(txt_file, info):
   txt_file.write('		num_output: %s\n'   % info['attrs']['num_filter'])
   txt_file.write('		kernel_size: %s\n'  % info['attrs']['kernel'].split('(')[1].split(',')[0]) # TODO
   if 'pad' not in info['attrs']:
-    print('miss Conv_pad')
+    logging.info('miss Conv_pad, make pad default: 0 ')
     txt_file.write('		pad: %s\n' % 0)  # TODO
   else:
     txt_file.write('		pad: %s\n'          % info['attrs']['pad'].split('(')[1].split(',')[0]) # TODO
@@ -104,8 +106,8 @@ def Activation(txt_file, info):
   elif info['attrs']['act_type'] == 'relu':
     txt_file.write('  type: "ReLU" \n')
   else:
-    print "Unknown avtivate_function" ,info['attrs']['act_type']
-
+    logging.info("Unknown avtivate_function %s" % info['attrs']['act_type'])
+    
   txt_file.write('}\n')
   txt_file.write('\n')
   pass
@@ -153,7 +155,7 @@ def Pooling_global(txt_file, info):
 
   if 'global_pool' not in info['attrs']:
     Pooling(txt_file, info)
-    print('miss Pool_global_pool')
+    logging.info('miss Pool_global_pool')
     return
   if info['attrs']['global_pool'] == 'False':
      Pooling(txt_file, info)
@@ -274,7 +276,7 @@ def write_node(txt_file, info):
       broadcast_mul(txt_file,info)
 
     else:
-        print "Unknown mxnet op:", info['op']
+        logging.warn("Unknown mxnet op: %s" %info['op'])
         #sys.exit("Warning!  Unknown mxnet op:{}".format(info['op']))
 
 
