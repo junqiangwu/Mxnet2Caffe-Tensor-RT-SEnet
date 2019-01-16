@@ -6,9 +6,18 @@
 - TensorRT_plugin_layer
  
    Provide mxnet to caffe conversion tool,currently supports Conv、BN、Elemwise、Concat、Pooling、Flatten、
-Cast、Fully、Slice、L2、Reshape、Broadcast etc. And then use the **Tensorrt** engine to parse the caffe model 
+Cast、Fully、Slice、L2、Reshape、Broadcast etc. And then use the **TensorRT(4.0)** engine to parse the caffe model 
 to improve performance.The project was successfully tested on SEnet.
     
+## Code
+ * `json2prototxt.py  prototxt_basic.py` Read mxnet_json file and converte to prototxt
+ * `mxnet2caffe.py` Read mxnet_model params_dict and converte to .caffemodel
+ * `mxnet_test.py` Debug mxnet output and you can compare the result with the converted caffemodel  
+ * `load_param.py` Print mxnet or caffe model param_dict
+ * `caffe_plugin_layer` Add caffe plugin_layer, but forward computing implementation in Tensorrt_RT Plugin layer
+ * `Tensor_RT/Tensor_RT_Plugin.cpp` Add Brocast_layer、Pooling and debug_layer in Tensor_RT by using IPluginExt API
+
+
 ## caffe_plugin_layer
 > The caffe framework does't support many Layers_op. If you need to convert a special layer,
  you need to add a layer plugin in the caffe framework and register the Layer_param. 
@@ -39,7 +48,6 @@ message BroadcastmulParameter {
 - sudo make pycaffe recompile python interface ***
 
 
-
 ## mxnet2caffe
 - First,you should run json2prototxt.py to convert the structure(json) of the mxnet model to prototxt format.
 - Then, run mxnet2caffe.py to read the prototxt network structure build using the API provided by pycaffe.
@@ -47,11 +55,10 @@ message BroadcastmulParameter {
 
 
 ## caffe2TensorRT and TensorRT_plugin_layer
-> The tensorrt engine can directly parse the caffe model. For unsupported OPs, you can manually add them using
+> The tensorrt engine can directly parse the caffe model. For unsupported ops, you can manually add them using
  the interface. This project adds a broadcast operation. In addition, it also tests the Pooling_layer，It also adds a test layer, 
  which can separately print the parameters in the structure and assist the Debug.
 
-添加自定义层主要包括两个步骤，
 
 - Firsy,Inherit the IPluginExt interface to create a custom layer class
 
@@ -81,3 +88,6 @@ message BroadcastmulParameter {
 This project provide Pooling, broadcast, and test_layer,you can see the implementation in the code.
 
 
+### TODO:
+
+* ~~Tensor RT supported Se_Resnet~~
