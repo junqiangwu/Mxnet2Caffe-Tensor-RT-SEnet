@@ -21,7 +21,7 @@
 #include <sys/time.h>
 //#include "plugin.h"
 
-#define FLT_MAX 3.402823466e+38F
+#define FLT_MAX 3.402823466e+38F 
 
 using namespace nvinfer1;
 using namespace nvcaffeparser1;
@@ -58,11 +58,11 @@ private:
     int c,h,w;
     string layer_name;
 public:
-    Broadcast(const char * name):layer_name(name){
+    Broadcast(const char * name):layer_name(name){ 
         printf("init_Layer %s\n",name);
      }
     ~Broadcast(){ }
-
+    
     Broadcast(const char* name,const void* data, size_t length):layer_name(name)
     {
         const char* d = static_cast<const char*>(data), *a = d;
@@ -100,7 +100,7 @@ public:
         c = inputDims[0].d[0];
 	    h = inputDims[0].d[1];
 	    w = inputDims[0].d[2];
-
+        
     }
 
     int initialize() override
@@ -125,7 +125,7 @@ public:
                 //     printf("name %s  c: %d i:%d  %f  %f \n ",layer_name.c_str(),i*w*h+j,i,pbottom[index+j],pbottom2[i]);
                 // }
                 pbottom[index+j] = pbottom[index+j] *pbottom2[i];
-
+                
             }
         }
         cudaMemcpy(outputs[0], (const void*)pbottom, sizeof(float) * c * h * w,cudaMemcpyHostToDevice);
@@ -147,7 +147,7 @@ public:
     }
     virtual void terminate() override {}
 
-
+ 
    virtual size_t getSerializationSize() override
     {
         return 3*sizeof(int);
@@ -173,11 +173,11 @@ private:
     int c,h,w;
     string layer_name;
 public:
-    Testlayer(const char * name):layer_name(name){
+    Testlayer(const char * name):layer_name(name){ 
         printf("Testlayer %s\n",name);
      }
     ~Testlayer(){ }
-
+    
     Testlayer(const char* name,const void* data, size_t length):layer_name(name)
     {
     	printf("test_deserialize %s\n",name);
@@ -217,7 +217,7 @@ public:
         c = inputDims[0].d[0];
 	    h = inputDims[0].d[1];
 	    w = inputDims[0].d[2];
-
+        
     }
 
     int initialize() override
@@ -237,7 +237,7 @@ public:
         // cudaMemcpy((void*)pbottom2, inputs[1], sizeof(float) * c* 1 *1, cudaMemcpyDeviceToHost);
 
 #if P_log
-
+    
     // if(!strcmp(layer_name.c_str(),"reshape0"))
     // {
         ofstream fp;
@@ -247,13 +247,13 @@ public:
 		{
 			fp << setiosflags(ios::fixed) <<setprecision(12) << pbottom[i] << endl;
 		}
-        fp.close();
+        fp.close(); 
 
    // }
-
+		
 #endif
         cudaMemcpy(outputs[0], (const void*)pbottom, sizeof(float) * c * h * w,cudaMemcpyHostToDevice);
-
+        
         free(pbottom);
         return 0;
     }
@@ -287,11 +287,11 @@ private:
 
     string layer_name;
 public:
-    PoolingLayer(const char * name):layer_name(name){
+    PoolingLayer(const char * name):layer_name(name){ 
         printf("Testlayer %s\n",name);
      }
     ~PoolingLayer(){ }
-
+    
     PoolingLayer(const char* name,const void* data, size_t length):layer_name(name)
     {
     	printf("test_deserialize %s\n",name);
@@ -313,9 +313,9 @@ public:
     {
         assert(index == 0 && nbInputDims == 1 && inputs[0].nbDims == 3);
         printf("name: %s inputs[0] %d %d %d \n",layer_name.c_str(),inputs[0].d[0], inputs[0].d[1], inputs[0].d[2]);
-
+        
         out_w = out_h = floor( (inputs[0].d[1]+2*p-k)/s + 1 );
-
+        
         printf("name: %s --> output %d %d %d \n",layer_name.c_str(),inputs[0].d[0],out_w, out_h);
 
         return DimsCHW(inputs[0].d[0],out_w, out_h);
@@ -334,7 +334,7 @@ public:
         _c = inputDims[0].d[0];
 	    _h = inputDims[0].d[1];
 	    _w = inputDims[0].d[2];
-
+        
     }
 
     int initialize() override
@@ -370,12 +370,12 @@ public:
 
         for(int n=0;n<_c;n++){
             int out_index = n*out_w*out_h;
-
+            
             float* int_buffer = pbottom + n*_w*_h;
 
             for(int ph=0;ph<out_h;ph++){
                 for(int pw=0;pw<out_w;pw++){
-
+                    
                     int hstart = ph*s -p;
                     int wstart = pw*s -p;
                     int hend = std::min(hstart+k,_h);
@@ -384,11 +384,11 @@ public:
                     wstart =std::max(wstart,0);
 
                     const int pool_index = out_index + ph * out_w + pw;
-
+                    
                     for (int h = hstart; h < hend; ++h) {
                         for (int w = wstart; w < wend; ++w) {
                             const int index = h * _w + w;
-
+                             
                             if (int_buffer[index] > top[pool_index]) {
                                  top[pool_index] = int_buffer[index];
                              }
@@ -400,24 +400,24 @@ public:
         }
 
 #if P_log
-
+   
     // if(!strcmp(layer_name.c_str(),"reshape0"))
     // {
         ofstream fp;
         fp.open(("pooling0.txt"),ios::out);
-
+ 
 		for(int i = 0; i < _c*out_h*out_w; i++)
 		{
 			fp << setiosflags(ios::fixed) <<setprecision(12) << top[i] << endl;
 		}
-        fp.close();
+        fp.close(); 
 
    // }
-
+		
 #endif
 
         cudaMemcpy(outputs[0], (const void*)top, sizeof(float) * _c * out_h * out_w,cudaMemcpyHostToDevice);
-
+        
         free(pbottom);
         free(top);
 
@@ -447,11 +447,210 @@ public:
 
 };
 
+
+#if 0
+
+class ConvolutionLayer: public IPluginExt{
+private:
+    int _c,_h,_w;
+    int k=3;
+    int p=1;
+    int s=1;
+    int out_w,out_h,out_c=64;
+
+    int mNbOutputChannels, mNbInputChannels;
+    Weights mKernelWeights, mBiasWeights;
+
+    string layer_name;
+public:
+    ConvolutionLayer(const char * name,const Weights* weights,int nbWeights):layer_name(name){ 
+        printf("ConvolutionLayer %s\n",name);
+        assert(nbWeights == 2);
+
+        mKernelWeights = weights[0];
+        mBiasWeights = weights[1];
+
+        mKernelWeights.values = malloc(mKernelWeights.count*type2size(mKernelWeights.type));
+        memcpy(const_cast<void*>(mKernelWeights.values), weights[0].values, mKernelWeights.count*type2size(mKernelWeights.type));
+        
+        mBiasWeights.values = malloc(mBiasWeights.count*type2size(mBiasWeights.type));
+        memcpy(const_cast<void*>(mBiasWeights.values), weights[1].vsdfalues, mBiasWeights.count*type2size(mBiasWeights.type));
+
+     }
+    ~ConvolutionLayer(){ }
+    
+    ConvolutionLayer(const char* name,const void* data, size_t length):layer_name(name)
+    {
+    	printf("Convolution_deserialize %s\n",name);
+        const char* d = static_cast<const char*>(data), *a = d;
+
+        read(d, _c);
+        read(d, _h);
+        read(d, _w);
+        read(d,out_w);
+        read(d,out_h);
+
+        read(d, mBiasWeights.count);
+        deserializeToDevice(d,mKernelWeights,k*k*_c*out_c*sizeof(float));
+
+        deserializeToDevice(d,mBiasWeights, mBiasWeights.count*sizeof(float));
+        assert(d == a + length);
+    }
+
+    int getNbOutputs() const override{
+        return 1;
+    }
+
+    Dims getOutputDimensions(int index, const Dims* inputs, int nbInputDims) override
+    {
+        assert(index == 0 && nbInputDims == 1 && inputs[0].nbDims == 3);
+        printf("name: %s inputs[0] %d %d %d \n",layer_name.c_str(),inputs[0].d[0], inputs[0].d[1], inputs[0].d[2]);
+        
+        out_w = out_h = floor( (inputs[0].d[1]+2*p-k)/s + 1 );
+        
+        printf("name: %s --> output %d %d %d \n",layer_name.c_str(),inputs[0].d[0],out_w, out_h);
+
+        return DimsCHW(inputs[0].d[0],out_w, out_h);
+    }
+
+    bool supportsFormat(DataType type, PluginFormat format) const override { return (type == DataType::kFLOAT || type == DataType::kHALF) && format == PluginFormat::kNCHW; }
+
+   virtual size_t getWorkspaceSize(int maxBatchSize) const override
+    {
+        return 0;
+    }
+
+    void configureWithFormat(const Dims* inputDims, int nbInputs, const Dims* outputDims, int nbOutputs, DataType type, PluginFormat format, int maxBatchSize) override
+    {
+        assert((type == DataType::kFLOAT || type == DataType::kHALF) && format == PluginFormat::kNCHW);
+        _c = inputDims[0].d[0];
+	    _h = inputDims[0].d[1];
+	    _w = inputDims[0].d[2];
+        
+    }
+
+    int initialize() override
+    {
+        return 0;
+    }
+
+
+    virtual int enqueue(int batchSize, const void*const * inputs, void** outputs, void* workspace, cudaStream_t stream) override
+    {
+    	printf("enqueue %s c  %d h  %d w   %d  \n",layer_name.c_str(),_c,_h,_w);
+
+        float *pbottom = (float*)malloc(sizeof(float)*_c*_h*_w);
+	    cudaMemcpy((void*)pbottom, inputs[0], sizeof(float) * _c* _h * _w, cudaMemcpyDeviceToHost);
+
+        float* top = (float*)malloc(sizeof(float)*out_c*out_w*out_h);
+
+        for(int pc=0;pc<out_c;pc++){
+            int top_index = pc*out_h*out_w;
+
+            for(int ph=0;ph<out_h;ph++){
+                for(int pw=0;pw<out_w;pw++){
+                    
+                    int hstart = ph*s -p;
+                    int wstart = pw*s -p;
+                    int hend = min(hstart+k,_h);
+                    int Wend = min(Wstart+k,_W);
+                    int hstart = std::min(start,0);
+                    int wstart = std::min(wtart,0);
+                    
+                    const int conv_index = top_index + ph * out_w + pw;
+                    
+                    for(int n=0;n<_c;n++){
+                        
+                        for(int h=hstart;h<hend;h++){
+                            for(int w=wstart;w<wend;w++){
+                                const int bottom_index = n*_w*_h + h*_w + w;
+                                top[conv_index] += mKernelWeights[]*pbottom[] + mBiasWeights[n];
+
+
+                            }
+
+                        }
+                    }
+
+                }
+
+
+            }
+
+
+        }
+
+#if P_log
+        ofstream fp;
+        fp.open(("ConvolutionLayer.txt"),ios::out);
+ 
+		for(int i = 0; i < _c*out_h*out_w; i++)
+		{
+			fp << setiosflags(ios::fixed) <<setprecision(12) << top[i] << endl;
+		}
+        fp.close(); 
+#endif
+
+        cudaMemcpy(outputs[0], (const void*)top, sizeof(float) * _c * out_h * out_w,cudaMemcpyHostToDevice);
+        
+        free(pbottom);
+        free(top);
+
+        return 0;
+
+    }
+
+    virtual void terminate() override {}
+
+    virtual size_t getSerializationSize() override
+    {
+        return 5*sizeof(int);
+    }
+
+
+    void write_buff(char*& buffer, const Weights& weights){
+        memcpy(buffer, weights.values, weights.count * sizeof(float));
+         buffer += weights.count * sizeof(float);
+    }
+
+    void deserializeToDevice(const char*& hostBuffer, void*& deviceWeights, size_t size)
+    {
+        void* deviceData;
+        cudaMalloc(&deviceData, size)
+        CHECK(cudaMemcpy(deviceData, hostBuffer, size, cudaMemcpyHostToDevice));
+
+        deviceWeights = deviceData;
+        hostBuffer += size;
+    }
+
+    virtual void serialize(void* buffer) override
+    {
+        char* d = static_cast<char*>(buffer), *a = d;
+
+        write(d, _c);
+        write(d, _h);
+        write(d, _w);
+        write(d, out_w);
+        write(d, out_h);
+
+        write(d, mBiasWeights.count);
+        write_buff(d,mKernelWeights);
+        write_buff(d,mBiasWeights);
+
+        assert(d == a + getSerializationSize());
+    }
+
+};
+
+
+#endif 
+
+
 enum Layer_type{
-    BROADCAST;
-    POOLING;
-    Test;
-    UNKNOWN;
+    BROADCAST,
+    POOLING,
+    TEST,
+    UNKNOWN
 };
 
 Layer_type get_type(const char *name)
@@ -463,17 +662,16 @@ Layer_type get_type(const char *name)
         return POOLING;
 
     else if(!strcmp(name,test_layer))
-        return Test;
+        return TEST;
     else
-    {
     	return UNKNOWN;
-    }
+    
 }
 
 class PluginFactory :public nvinfer1::IPluginFactory, public nvcaffeparser1::IPluginFactoryExt{
 
 public:
-
+   
     std::vector<Broadcast *> broadcast_ptrs;
     std::vector<Testlayer *> testlayer_ptrs;
     std::vector<PoolingLayer *> poolinglayer_ptrs;
@@ -492,7 +690,7 @@ public:
     virtual nvinfer1::IPlugin* createPlugin(const char* layerName, const nvinfer1::Weights* weights, int nbWeights) override
     {
         // there's no way to pass parameters through from the model definition, so we have to define it here explicitly
-
+        
         assert(isPlugin(layerName));
         Layer_type t = get_type(layerName);
 
@@ -503,8 +701,8 @@ public:
             broadcast_ptrs.push_back(broadcast_ptr);
             return broadcast_ptr;
         }
-
-        else if(t == Test ){
+        
+        else if(t == TEST ){
             printf("test_createPlugin_layer_name: %s\n",layerName);
 
             Testlayer* testlayer_ptr = new Testlayer(layerName);
@@ -521,7 +719,7 @@ public:
         else{
             printf("unknown layer: %s",layerName);
             return nullptr;
-        }
+        }  
     }
 
     // deserialization plugin implementation
@@ -538,7 +736,7 @@ public:
             broadcast_ptrs.push_back(broadcast_ptr);
             return broadcast_ptr;
         }
-
+        
         else if(t == TEST){
             printf("test_deserialization_layer:  %s\n",layerName);
 
@@ -663,7 +861,7 @@ void read_img(const char* filename,float* input_data,int h,int w){
     assert(img.empty());
     cv::resize(img,img,cv::Size(h,w));
     float *img_data = (float *)img.data;
-
+   
     unsigned int size=h * w;
     const float pixelMean[3]{ 104.0f, 117.0f, 123.0f }; // also in BGR order
 
@@ -687,7 +885,7 @@ int main(int argc, char** argv)
     const char * proto_path = "../../../data/se_resnet34/se_resnet34.prototxt";
 
     caffeToTRTModel(proto_path, mdole_path, std::vector < std::string > { OUTPUT_BLOB_NAME }, 1, &parserPluginFactory, trtModelStream);
-
+    
     parserPluginFactory.destroyPlugin();
     assert(trtModelStream != nullptr);
 
@@ -695,7 +893,7 @@ int main(int argc, char** argv)
     const char * img_file = "/home/wjq/TensorRT-4.0.1.6/data/before_forward.jpg";
 
     //read_img(img_file,data,108,108);
-
+    
     for (int i = 0; i < INPUT_C* INPUT_H * INPUT_W; i++)
         data[i]=1;
 
